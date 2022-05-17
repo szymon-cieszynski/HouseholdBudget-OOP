@@ -35,6 +35,41 @@ int main()
                 break;
             }
         }
+       /* else
+        {
+            char wybor = ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
+
+            switch (wybor)
+            {
+            case '1':
+                ksiazkaAdresowa.dodajAdresata();
+                break;
+            case '2':
+                ksiazkaAdresowa.wyszukajAdresatowPoImieniu();
+                break;
+            case '3':
+                ksiazkaAdresowa.wyszukajAdresatowPoNazwisku();
+                break;
+            case '4':
+                ksiazkaAdresowa.wyswietlWszystkichAdresatow();
+                break;
+            case '5':
+                ksiazkaAdresowa.usunAdresata();
+                break;
+            case '6':
+                //edytujAdresata(adresaci);
+                ksiazkaAdresowa.edytujAdresata();
+                break;
+            case '7':
+                ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
+                break;
+            case '8':
+                idZalogowanegoUzytkownika = 0;
+                adresaci.clear();
+                ksiazkaAdresowa.wylogujUzytkownika();
+                break;
+            }
+        }*/
     }
 
     return 0;
