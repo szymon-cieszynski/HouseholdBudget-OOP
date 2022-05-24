@@ -68,7 +68,17 @@ void HouseholdBudget::loadUsersFromFile()
     userManager.loadUsersFromFile();
 }
 
+void HouseholdBudget::loadIncomesFromFile()
+{
+    budgetManager.loadIncomesFromFile(idLoggedUser);
+}
+
 void HouseholdBudget::showAllUsers()
 {
     userManager.showAllUsers();
+}
+
+void HouseholdBudget::showAllIncomes()
+{
+    budgetManager.showAllIncomes();
 }

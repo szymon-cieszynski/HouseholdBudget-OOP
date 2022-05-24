@@ -4,6 +4,7 @@
 #include <sstream>
 #include <windows.h>
 #include<string>
+#include <iomanip> //for setprecision
 
 using namespace std;
 
@@ -78,6 +79,41 @@ string AuxillaryMethods::floatToString(float amount)
     string str = ss.str();
     return str;
 }
+
+
+string AuxillaryMethods::checkComma(string amountString)
+{
+    double amount;
+    size_t dot_position;
+    if (amountString.find(',') != string::npos)
+    {
+        dot_position = amountString.find(',');
+        amountString[dot_position] = '.';
+    }
+    /*cout << amountString << endl;
+    system("pause");*/
+
+    return amountString;
+}
+
+/*double AuxillaryMethods::stringToFloat(string amountString)
+{
+    double amount;
+    size_t dot_position;
+    if (amountString.find(',') != string::npos)
+    {
+        dot_position = amountString.find(',');
+        amountString[dot_position] = '.';
+    }
+    cout << amountString << endl;
+    system("pause");
+
+    /*stringstream out;
+    out << fixed << setprecision(2) << stod(amountString);
+    amount = stod(out.str());
+    amount = stod(amountString.c_str());
+    return amount;
+}*/
 
 /*int MetodyPomocnicze::wczytajLiczbeCalkowita()
 {

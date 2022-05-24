@@ -18,7 +18,7 @@ private:
 public:
     //FileWithUsersXML();
     void addIncomeToFile(Income income);
-    vector <Income> loadIncomesFromFile();
+    vector <Income> loadIncomesFromFile(int idLoggedUser);
 
 
 };

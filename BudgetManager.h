@@ -31,6 +31,8 @@ public:
     void showBalanceFromCurrentMonth();
     void showBalanceFromPreviousMonth();
     void showBalanceFromSelectedPeriod();
+    vector <Income> loadIncomesFromFile(int idLoggedUser);
+    void showAllIncomes();
 };
 
 

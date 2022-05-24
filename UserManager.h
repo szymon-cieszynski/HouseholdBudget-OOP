@@ -35,7 +35,7 @@ public:
     int logIn();
     bool isUserLoggedIn();
     vector <User> loadUsersFromFile();
-    void showAllUsers();
+    void showAllUsers(); //supporting funcion!
     void changePassword();
     void logOut();
 

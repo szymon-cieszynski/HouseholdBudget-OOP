@@ -24,62 +24,65 @@ void FileWithIncomesXML::addIncomeToFile(Income income)
     xml.AddElem("UserId", income.getUserId());
     xml.AddElem("Date", income.getDate());
     xml.AddElem("Item", (income.getTypeOfIncome()));
-    xml.AddElem("Amount", AuxillaryMethods::floatToString(income.getAmount()));
+    //xml.AddElem("Amount", AuxillaryMethods::floatToString(income.getAmount()));
+    xml.AddElem("Amount", income.getAmountString()); //konwersja obcinala kwote np. 10.50 zamienial na 10.5
 
     xml.Save("incomes.xml");
 }
 
-vector <Income> FileWithIncomesXML::loadIncomesFromFile()
+vector <Income> FileWithIncomesXML::loadIncomesFromFile(int idLoggedUser)
 {
-   /* vector <User> users;
-    User user;
+    vector <Income> incomes;
+    Income income;
 
     CMarkup xml;
-    bool fileExists = xml.Load( "users.xml" );
+    bool fileExists = xml.Load( "incomes.xml" );
 
     if (fileExists)
     {
         xml.FindElem();
         xml.IntoElem();
-        while( xml.FindElem("User"))
+        while( xml.FindElem("Income"))
         {
-            //xml.FindElem();
             xml.IntoElem();
             xml.FindElem( "UserId" );
-            int id = atoi(xml.GetData().c_str() );
-            user.setId(id);
-            //xml.ResetMainPos();
+            int userId = atoi(xml.GetData().c_str() );
+            if(idLoggedUser == userId)
+            {
+                income.setUserId(userId);
 
-            xml.FindElem( "Login" );
-            string login = xml.GetData();
-            user.setLogin(login);
-            //xml.ResetMainPos();
+                xml.FindElem( "IncomeId" );
+                int incomeId = atoi(xml.GetData().c_str() );
+                income.setIncomeId(incomeId);
 
-            xml.FindElem( "Name" );
-            string name = xml.GetData();
-            user.setName(name);
-            //xml.ResetMainPos();
+                xml.FindElem( "Date" );
+                string date = xml.GetData();
+                income.setDate(date);
 
-            xml.FindElem( "LastName" );
-            string lastName = xml.GetData();
-            user.setLastName(lastName);
-            //xml.ResetMainPos();
+                xml.FindElem( "Item" );
+                string item = xml.GetData();
+                income.setTypeOfIncome(item);
 
-            xml.FindElem( "Password" );
-            string password = xml.GetData();
-            user.setPassword(password);
+                xml.FindElem( "Amount" );
+                float amount = stof(xml.GetData().c_str() );
+                //string amountString = xml.GetData();
+                //income.setAmountString(amountString);
+                income.setAmount(amount);
+            }
 
-            users.push_back(user);
+            incomes.push_back(income);
             xml.OutOfElem();
-
         }
-        //xml.Close();
+
+        cout<< incomes.size() << endl;
+        system("pause");
     }
     else
     {
-        cout<< "Add first user to the app" << endl;
+        cout<< "Add first income" << endl;
         Sleep(1000);
     }
 
-    return users;*/
+    return incomes;
+
 }

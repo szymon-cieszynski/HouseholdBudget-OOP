@@ -36,7 +36,9 @@ public:
     void changePassword();
     void logOut();
     void loadUsersFromFile();
+    void loadIncomesFromFile();
     void showAllUsers();
+    void showAllIncomes();
 
 
 };

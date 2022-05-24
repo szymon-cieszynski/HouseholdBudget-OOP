@@ -35,7 +35,7 @@ int main()
         else
         {
             char choice = householdBudget.chooseFromUserMenu();
-
+            householdBudget.loadIncomesFromFile();
             switch (choice)
             {
             case '1':
@@ -58,6 +58,9 @@ int main()
                 break;
             case '7':
                 householdBudget.logOut();
+                break;
+            case '8':
+                householdBudget.showAllIncomes();
                 break;
             }
         }

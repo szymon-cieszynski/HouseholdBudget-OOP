@@ -28,7 +28,9 @@
 + changePassword() : void
 + logOut() : void
 + loadUsersFromFile() : void
-+ showAllUsers() : void</panel_attributes>
++ loadIncomesFromFile() : void
++ showAllUsers() : void //supporting function
++ showAllIncomes() : void //supporting function</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -181,6 +183,7 @@ _+ getNumber() : String_
 _+ conversionStringtoInt() : Integer_
 _+ loadLine() : String_
 _+ floatToString() : String_
+_+ checkComma() : String_
 _+ loadCharacter() : Char_
 _+ loadInteger() : Integer_
 _+ changeFirstLetterToCapitalAndOthersToLower() : String_
@@ -208,6 +211,7 @@ _+ changeFirstLetterToCapitalAndOthersToLower() : String_
 + showBalanceFromCurrentMonth() : void
 + showBalanceFromPreviousMonth() : void
 + showBalanceFromSelectedPeriod() : void
++ loadIncomesFromFile() : vector &lt;Income&gt;
 
 
 </panel_attributes>
@@ -227,7 +231,8 @@ _+ changeFirstLetterToCapitalAndOthersToLower() : String_
 - date : String
 - typeOfIncome : String
 - incomeId : Integer
-- userId : Integer</panel_attributes>
+- userId : Integer
+- amountString : String</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

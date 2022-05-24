@@ -12,6 +12,7 @@ class Income
     string typeOfIncome;
     int incomeId;
     int userId;
+    string amountString;
 
 public:
     void setAmount(float newAmount);
@@ -19,12 +20,14 @@ public:
     void setTypeOfIncome(string newTypeOfIncome);
     void setIncomeId(int newIncomeId);
     void setUserId(int newUserId);
+    void setAmountString(string newAmountString);
 
     float getAmount();
     string getDate();
     string getTypeOfIncome();
     int getIncomeId();
     int getUserId();
+    string getAmountString();
 };
 
 #endif

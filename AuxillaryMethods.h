@@ -17,6 +17,8 @@ class AuxillaryMethods
     static string changeFirstLetterToCapitalAndOthersToLower(string text);
     static string loadLine();
     static string floatToString(float amount);
+    static string checkComma(string amountString);
+    //static double stringToFloat(string amountString);
     /*static int wczytajLiczbeCalkowita();*/
 
 

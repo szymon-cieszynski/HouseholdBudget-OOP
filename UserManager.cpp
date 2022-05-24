@@ -107,6 +107,7 @@ char UserManager::chooseFromUserMenu()
     cout << "5. Balance from selected time period" << endl;
     cout << "6. Change password" << endl;
     cout << "7. Log out" << endl;
+    cout << "8. Show All Incomes" << endl;
     cout << "---------------------------" << endl;
     cout << "Your choice: ";
     choice = AuxillaryMethods::loadCharacter();

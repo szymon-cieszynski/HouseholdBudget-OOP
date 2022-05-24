@@ -28,6 +28,10 @@ void Income::setUserId(int newUserId)
     userId = newUserId;
 }
 
+void Income::setAmountString(string newAmountString)
+{
+    amountString = newAmountString;
+}
 
 float Income::getAmount()
 {
@@ -52,4 +56,9 @@ int Income::getIncomeId()
 int Income::getUserId()
 {
     return userId;
+}
+
+string Income::getAmountString()
+{
+    return amountString;
 }

@@ -30,11 +30,14 @@ void BudgetManager::addIncome(int idLoggedUser)
     typeOfIncome = AuxillaryMethods::loadLine();
     income.setTypeOfIncome(typeOfIncome);
 
-    float amount = 0;
+    string amountString = "";
     cout<< "How many is that?" << endl;
 
-    cin >> amount;
-    income.setAmount(amount);
+    amountString = AuxillaryMethods::loadLine();
+
+    //float amount = AuxillaryMethods::checkComma(amountString);
+    amountString = AuxillaryMethods::checkComma(amountString);
+    income.setAmountString(amountString);
 
     incomes.push_back(income);
 
@@ -71,4 +74,25 @@ void BudgetManager::showBalanceFromPreviousMonth()
 void BudgetManager::showBalanceFromSelectedPeriod()
 {
 
+}
+
+vector <Income> BudgetManager::loadIncomesFromFile(int idLoggedUser)
+{
+    incomes = fileWithIncomesXML.loadIncomesFromFile(idLoggedUser);
+    return incomes;
+}
+
+void BudgetManager::showAllIncomes()
+{
+    for (int i = 0; i < incomes.size(); i++)
+    {
+        /*cout<< incomes.size() << endl;
+        system("pause");*/
+        cout << incomes[i].getIncomeId() << endl;
+        cout << incomes[i].getUserId() << endl;
+        cout << incomes[i].getDate() << endl;
+        cout << incomes[i].getTypeOfIncome() << endl;
+        cout << incomes[i].getAmount() << endl;
+        system("pause");
+    }
 }
