@@ -34,8 +34,9 @@ int main()
         }
         else
         {
-            char choice = householdBudget.chooseFromUserMenu();
             householdBudget.loadIncomesFromFile();
+            char choice = householdBudget.chooseFromUserMenu();
+
             switch (choice)
             {
             case '1':

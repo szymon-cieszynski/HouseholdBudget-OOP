@@ -11,12 +11,40 @@ string OperationOnDates::loadAndCheckDate()
         cout << endl << "Type date in format YYYY-MM-DD" << endl;
         getline (cin, date);
 
-        if(date[4] == '-' && date[7] == '-' /*&& date[0] == '2'*/ /*&& date[5]!='12'*/ && date.size() == 10)
+        bool lapyear = isLeapYear(date);
+
+        string daysOfMonthString = date.substr (8,2);
+        int daysOfMonth = stoi(daysOfMonthString);
+
+        /*cout << daysOfMonth << endl;
+        system("pause");*/
+
+        time_t theTime = time(NULL);
+        struct tm *aTime = localtime(&theTime);
+        int currentYear = aTime->tm_year + 1900;
+        int currentMonth = aTime->tm_mon + 1;
+
+        string yearString = date.substr (0,4);
+        int year = stoi(yearString);
+
+        string monthString = date.substr (5,2);
+        int month = 0;
+        month = stoi(monthString);
+
+        if(date[4] == '-' && date[7] == '-' && date.size() == 10)
         {
-            if(date[0]!='2') //czy nie bedzie potrzebnych wiecej warunkow? np. to do maks ostatniego dnia beziacego miesiaca
+            if(date[0]!='2')
             {
-                cout << "Earliest year has to be from 2000 year!"  << endl;
+                cout << endl << "Earliest year has to be from 2000 year!"  << endl;
                 //break;
+            }
+            else if (month > currentMonth || currentYear < year )
+            {
+                cout << endl << "You can enter income this month at the latest."  << endl;
+            }
+            else if (daysOfMonth > checkDaysOfMonths(lapyear, date))
+            {
+                cout << endl << "Incorrect days of typed month!"  << endl;
             }
             else
             {
@@ -26,7 +54,55 @@ string OperationOnDates::loadAndCheckDate()
         }
         else cout << "Incorrect format of date!" << endl;
     }
-    //return date;
+}
+
+int OperationOnDates::checkDaysOfMonths(bool lapyear, string date)
+{
+    int days = 0;
+    int month = 0;
+
+    string monthString = date.substr (5,2);
+    month = stoi(monthString);
+
+
+    if (month == 4 || month == 6 || month == 9 || month == 11)
+    {
+        return days = 30;
+    }
+    else if (month == 2)
+    {
+        if (lapyear == false)
+        {
+            return days = 28;
+        }
+        else
+        {
+            return days = 29;
+        }
+    }
+    else
+        return days = 31;
+
+    // cout<< "This month has: " << days << " days" << endl;
+}
+
+bool OperationOnDates::isLeapYear(string date)
+{
+    int year = 0;
+    string yearString = date.substr (0,4);
+    year = stoi(yearString);
+
+    bool leapyear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    if (leapyear == true)
+    {
+        // cout<< "This year is leapyear." << endl;
+        return true;
+    }
+    else
+    {
+        //cout<< "This year is NOT leapyear." << endl;
+        return false;
+    }
 }
 
 string OperationOnDates::getTodaysDate()
@@ -54,6 +130,5 @@ string OperationOnDates::getTodaysDate()
     }
 
     string date = yearString + '-' + monthString + '-' + dayString;
-
     return date;
 }

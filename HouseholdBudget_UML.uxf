@@ -39,7 +39,7 @@
       <x>342</x>
       <y>738</y>
       <w>315</w>
-      <h>162</h>
+      <h>198</h>
     </coordinates>
     <panel_attributes>OperationOnDates
 --
@@ -47,11 +47,14 @@
 - month : Integer
 - days : Integer
 --
+- isLeapYear() : bool
+- checkDaysOfMonths() : Integer
+
 + getTodaysDate() : String
 + loadAndCheckDate(): String
 + checkDaysOfMonths() : void
 + compareTwoDates() : void
-+ isLeapYear() : void</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -151,7 +154,7 @@
 - fileWithUsersXML : FileWithUsersXML
 --
 - typeDataOfNewUser() : User
-- establishNewUserID() : Integer
+- establishNewIncomeIdFromFile() : Integer
 - isLoginExist() : Bool
 - changeOfLoggedUserPassword() : void
 

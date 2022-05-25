@@ -35,24 +35,33 @@ vector <Income> FileWithIncomesXML::loadIncomesFromFile(int idLoggedUser)
     vector <Income> incomes;
     Income income;
 
+
+        /*cout<< "Logged User: " << idLoggedUser << endl;
+        system("pause");*/
+
     CMarkup xml;
     bool fileExists = xml.Load( "incomes.xml" );
 
     if (fileExists)
     {
-        xml.FindElem();
+        xml.FindElem(); //enter to Incomes
         xml.IntoElem();
+
         while( xml.FindElem("Income"))
         {
-            xml.IntoElem();
-            xml.FindElem( "UserId" );
-            int userId = atoi(xml.GetData().c_str() );
+            xml.IntoElem(); //enter to Income
+            xml.FindElem("UserId");
+
+            int userId = atoi(xml.GetData().c_str());
+
             if(idLoggedUser == userId)
             {
+                xml.ResetMainPos(); //without this wrong writing of incomeId
                 income.setUserId(userId);
 
                 xml.FindElem( "IncomeId" );
-                int incomeId = atoi(xml.GetData().c_str() );
+                int incomeId = 0;
+                incomeId = atoi(xml.GetData().c_str() );
                 income.setIncomeId(incomeId);
 
                 xml.FindElem( "Date" );
@@ -64,25 +73,23 @@ vector <Income> FileWithIncomesXML::loadIncomesFromFile(int idLoggedUser)
                 income.setTypeOfIncome(item);
 
                 xml.FindElem( "Amount" );
-                float amount = stof(xml.GetData().c_str() );
-                //string amountString = xml.GetData();
-                //income.setAmountString(amountString);
+                float amount = atof(xml.GetData().c_str() );
                 income.setAmount(amount);
+
+                //string amountString = xml.GetData(); //for two characters amount after pointer - for example 10.50
+                //income.setAmountString(amountString);
+
+                incomes.push_back(income);
             }
-
-            incomes.push_back(income);
-            xml.OutOfElem();
+            xml.OutOfElem(); //out of Income - jesli bylo to w ifie to sprawdzal tylko jedno id, nie zwazal na inne
         }
-
-        cout<< incomes.size() << endl;
-        system("pause");
+        /*cout<< incomes.size() << endl;
+        system("pause");*/
     }
     else
     {
         cout<< "Add first income" << endl;
         Sleep(1000);
     }
-
     return incomes;
-
 }

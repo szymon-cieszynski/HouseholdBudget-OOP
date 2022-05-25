@@ -20,11 +20,13 @@ void Income::setTypeOfIncome(string newTypeOfIncome)
 
 void Income::setIncomeId(int newIncomeId)
 {
+    if (newIncomeId >= 0)
     incomeId = newIncomeId;
 }
 
 void Income::setUserId(int newUserId)
 {
+    if (newUserId >= 0)
     userId = newUserId;
 }
 

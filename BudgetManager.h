@@ -16,7 +16,7 @@ class BudgetManager
 private:
     vector <Income> incomes;
     FileWithIncomesXML fileWithIncomesXML;
-    int establishNewIncomeID();
+    int establishNewIncomeIdFromFile();
     //const int ID_OF_LOGGED_USER;
     //OperationOnDates operationOnDates;
 

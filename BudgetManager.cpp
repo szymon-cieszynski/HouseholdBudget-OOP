@@ -1,4 +1,5 @@
 #include "BudgetManager.h"
+#include <windows.h> //function Sleep
 
 using namespace std;
 
@@ -6,7 +7,7 @@ void BudgetManager::addIncome(int idLoggedUser)
 {
     Income income;
 
-    income.setIncomeId(establishNewIncomeID());
+    income.setIncomeId(establishNewIncomeIdFromFile());
     income.setUserId(idLoggedUser);
 
     cout << "Income from today? y/n" << endl;
@@ -48,12 +49,31 @@ void BudgetManager::addIncome(int idLoggedUser)
 
 }
 
-int BudgetManager::establishNewIncomeID()
+int BudgetManager::establishNewIncomeIdFromFile()
 {
-    if (incomes.empty() == true)
-        return 1;
+    int lastIncomeId = 0;
+    CMarkup xml;
+    bool fileExists = xml.Load( "incomes.xml" );
+
+    if (fileExists)
+    {
+        xml.FindElem();
+        xml.IntoElem();
+        while( xml.FindElem("Income"))
+        {
+            xml.IntoElem();
+            xml.FindElem( "IncomeId" );
+            lastIncomeId = atoi(xml.GetData().c_str() );
+            xml.OutOfElem();
+        }
+    }
     else
-        return incomes.back().getIncomeId() + 1;
+    {
+        cout<< "Add first income to the app" << endl;
+        Sleep(1000);
+        return 1;
+    }
+    return lastIncomeId + 1;
 }
 
 void BudgetManager::addExpense()
