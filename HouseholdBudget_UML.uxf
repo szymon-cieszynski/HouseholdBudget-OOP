@@ -29,8 +29,10 @@
 + logOut() : void
 + loadUsersFromFile() : void
 + loadIncomesFromFile() : void
++ loadExpensesFromFile() : void
 + showAllUsers() : void //supporting function
-+ showAllIncomes() : void //supporting function</panel_attributes>
++ showAllIncomes() : void //supporting function
++ showAllExpenses() : void //testing func</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -47,13 +49,14 @@
 - month : Integer
 - days : Integer
 --
-- isLeapYear() : bool
-- checkDaysOfMonths() : Integer
+_- isLeapYear() : bool_
+_- checkDaysOfMonths() : Integer_
 
-+ getTodaysDate() : String
-+ loadAndCheckDate(): String
-+ checkDaysOfMonths() : void
-+ compareTwoDates() : void
+_+ loadAndCheckDate(): String_
+_+ getTodaysDate() : String_
+_+ dateStringToInt() : Integer_
+
+//+ compareTwoDates() : void
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -203,11 +206,13 @@ _+ changeFirstLetterToCapitalAndOthersToLower() : String_
     </coordinates>
     <panel_attributes>BudgetManager
 --
-- 
-- 
-- 
+- incomes : vector &lt;Income&gt;
+- expenses : vector &lt;Expense&gt;
+- fileWithIncomesXML : FileWithIncomesXML
+- fileWithExpensesXML : FileWithExpensesXML
 --
-- establishNewIncomeID() : Integer
+- establishNewIncomeIdFromFile() : Integer
+- establishNewExpenseIdFromFile() : Integer
 &lt;&lt;construct&gt;&gt; BudgetManager()
 + addIncome() : void
 + addExpense() : void
@@ -215,6 +220,9 @@ _+ changeFirstLetterToCapitalAndOthersToLower() : String_
 + showBalanceFromPreviousMonth() : void
 + showBalanceFromSelectedPeriod() : void
 + loadIncomesFromFile() : vector &lt;Income&gt;
++ loadExpensesFromFile() : vector &lt;Expense&gt;
++ showAllIncomes() : void //testing func
++ showAllExpenses() : void //testing func
 
 
 </panel_attributes>
@@ -226,12 +234,13 @@ _+ changeFirstLetterToCapitalAndOthersToLower() : String_
       <x>792</x>
       <y>9</y>
       <w>189</w>
-      <h>108</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Income
 --
 - amount : double
 - date : String
+- dateInt: Integer
 - typeOfIncome : String
 - incomeId : Integer
 - userId : Integer
