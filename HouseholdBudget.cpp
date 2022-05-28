@@ -34,7 +34,7 @@ void HouseholdBudget::addIncome()
 
 void HouseholdBudget::addExpense()
 {
-    budgetManager.addExpense();
+    budgetManager.addExpense(idLoggedUser);
 }
 
 void HouseholdBudget::showBalanceFromCurrentMonth()
@@ -73,6 +73,11 @@ void HouseholdBudget::loadIncomesFromFile()
     budgetManager.loadIncomesFromFile(idLoggedUser);
 }
 
+void HouseholdBudget::loadExpensesFromFile()
+{
+    budgetManager.loadExpensesFromFile(idLoggedUser);
+}
+
 void HouseholdBudget::showAllUsers()
 {
     userManager.showAllUsers();
@@ -81,4 +86,9 @@ void HouseholdBudget::showAllUsers()
 void HouseholdBudget::showAllIncomes()
 {
     budgetManager.showAllIncomes();
+}
+
+void HouseholdBudget::showAllExpenses()
+{
+    budgetManager.showAllExpenses();
 }
