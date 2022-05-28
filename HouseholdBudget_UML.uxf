@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>36</x>
+      <y>54</y>
+      <w>342</w>
+      <h>333</h>
+    </coordinates>
+    <panel_attributes>HouseholdBudget
+--
+- idLoggedUser : Integer
+- NAME_OF_FILE_WITH_USERS : constant String
+--
+&lt;&lt;construct&gt;&gt; HouseholdBudget()
++ registrationOfUser() : void
++ logIn() : Integer
++ isUserLoggedIn() : Bool
++ chooseFromMainMenu() : Char
++ chooseFromUserMenu() : Char
++ addIncome() : void
++ addExpense() : void
++ showBalanceFromCurrentMonth() : void
++ showBalanceFromPreviousMonth() : void
++ showBalanceFromSelectedPeriod() : void
++ changePassword() : void
++ logOut() : void
++ loadUsersFromFile() : void
++ loadIncomesFromFile() : void
++ showAllUsers() : void //supporting function
++ showAllIncomes() : void //supporting function</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>342</x>
+      <y>738</y>
+      <w>315</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>OperationOnDates
+--
+- year : Integer
+- month : Integer
+- days : Integer
+--
+- isLeapYear() : bool
+- checkDaysOfMonths() : Integer
+
++ getTodaysDate() : String
++ loadAndCheckDate(): String
++ checkDaysOfMonths() : void
++ compareTwoDates() : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>522</x>
+      <y>9</y>
+      <w>189</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>User
+--
+- id : Integer
+- name : String
+- lastName: String
+- login : String
+- password: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>351</y>
+      <w>495</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>FileWithUsersXML
+--
+
+--
+- getDataOfUSer() : User
+
+&lt;&lt;construct&gt;&gt; FileWithUsersXML()
++ addUserToFile() : void
++ loadUsersFromFile() : vector &lt;User&gt;
++ saveAllUsersToFile : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>531</y>
+      <w>495</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>FileWithIncomesXML
+--
+
+--
+- 
+- 
+
+&lt;&lt;construct&gt;&gt; FileWithIncomesXML()
++ addIncomeToFile() : void
++ loadIncomesFromFile() : vector &lt;Income&gt;
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>711</y>
+      <w>495</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>FileWithExpensesXML
+--
+
+--
+- 
+- 
+
+&lt;&lt;construct&gt;&gt; FileWithExpensesXML()
++ addExpenseToFile() : void
++ loadExpensesFromFile() : vector &lt;Expense&gt;
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>414</x>
+      <y>135</y>
+      <w>459</w>
+      <h>279</h>
+    </coordinates>
+    <panel_attributes>UserManager
+--
+- idLoggedUser : Integer
+- users : vector &lt;User&gt;
+- fileWithUsersXML : FileWithUsersXML
+--
+- typeDataOfNewUser() : User
+- establishNewIncomeIdFromFile() : Integer
+- isLoginExist() : Bool
+- changeOfLoggedUserPassword() : void
+
+&lt;&lt;construct&gt;&gt; UserManager()
++ registrationOfUser() : void
++ logIn() : Integer
++ isUserLoggedIn() : Bool
++ getIdOfLoggedInUser() : Integer
++ chooseFromMainMenu() : Char
++ changePassword() : void
++ logOut() : void
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1188</x>
+      <y>18</y>
+      <w>351</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>AuxillaryMethods
+--
+_+ conversionIntToString() : String_
+_+ getNumber() : String_
+_+ conversionStringtoInt() : Integer_
+_+ loadLine() : String_
+_+ floatToString() : String_
+_+ checkComma() : String_
+_+ loadCharacter() : Char_
+_+ loadInteger() : Integer_
+_+ changeFirstLetterToCapitalAndOthersToLower() : String_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>432</y>
+      <w>459</w>
+      <h>279</h>
+    </coordinates>
+    <panel_attributes>BudgetManager
+--
+- 
+- 
+- 
+--
+- establishNewIncomeID() : Integer
+&lt;&lt;construct&gt;&gt; BudgetManager()
++ addIncome() : void
++ addExpense() : void
++ showBalanceFromCurrentMonth() : void
++ showBalanceFromPreviousMonth() : void
++ showBalanceFromSelectedPeriod() : void
++ loadIncomesFromFile() : vector &lt;Income&gt;
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>792</x>
+      <y>9</y>
+      <w>189</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>Income
+--
+- amount : double
+- date : String
+- typeOfIncome : String
+- incomeId : Integer
+- userId : Integer
+- amountString : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
