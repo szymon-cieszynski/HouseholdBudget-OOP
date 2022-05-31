@@ -14,6 +14,7 @@ private:
 public:
     static string loadAndCheckDate();
     static string getTodaysDate();
+    static int dateStringToInt(string date);
 
 };
 

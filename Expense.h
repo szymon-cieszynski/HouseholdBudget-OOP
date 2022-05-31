@@ -1,36 +1,33 @@
-#ifndef INCOME_H
-#define INCOME_H
+#ifndef EXPENSE_H
+#define EXPENSE_H
 
 #include <iostream>
 
 using namespace std;
 
-class Income
+class Expense
 {
     float amount;
-    int dateInt;
     string date;
-    string typeOfIncome;
-    int incomeId;
+    string typeOfExpense;
+    int expenseId;
     int userId;
     string amountString;
 
 public:
     void setAmount(float newAmount);
     void setDate(string newDate);
-    void setTypeOfIncome(string newTypeOfIncome);
-    void setIncomeId(int newIncomeId);
+    void setTypeOfExpense(string newTypeOfExpense);
+    void setExpenseId(int newExpenseId);
     void setUserId(int newUserId);
     void setAmountString(string newAmountString);
-    void setDateInt(int newDateInt);
 
     float getAmount();
     string getDate();
-    string getTypeOfIncome();
-    int getIncomeId();
+    string getTypeOfExpense();
+    int getExpenseId();
     int getUserId();
     string getAmountString();
-    int getDateInt();
 };
 
 #endif

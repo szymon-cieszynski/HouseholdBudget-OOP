@@ -25,11 +25,13 @@ string OperationOnDates::loadAndCheckDate()
         int currentMonth = aTime->tm_mon + 1;
 
         string yearString = date.substr (0,4);
-        int year = stoi(yearString);
+        int typedYear = stoi(yearString);
+
+        /*cout << "Current year is: " << currentYear << endl;
+        system("pause");*/
 
         string monthString = date.substr (5,2);
-        int month = 0;
-        month = stoi(monthString);
+        int typedMonth = stoi(monthString);
 
         if(date[4] == '-' && date[7] == '-' && date.size() == 10)
         {
@@ -38,7 +40,7 @@ string OperationOnDates::loadAndCheckDate()
                 cout << endl << "Earliest year has to be from 2000 year!"  << endl;
                 //break;
             }
-            else if (month > currentMonth || currentYear < year )
+            else if (typedMonth > currentMonth && typedYear >= currentYear || typedYear > currentYear)
             {
                 cout << endl << "You can enter income this month at the latest."  << endl;
             }
@@ -131,4 +133,25 @@ string OperationOnDates::getTodaysDate()
 
     string date = yearString + '-' + monthString + '-' + dayString;
     return date;
+}
+
+int OperationOnDates::dateStringToInt(string date)
+{
+    int dateInt = 0;
+    size_t dash_position;
+
+    for(int i = 0 ; i < date.size() ; i++)
+    {
+        if (date.find('-') != string::npos)
+        {
+            dash_position = date.find('-');
+            date.erase(dash_position, 1);
+        }
+    }
+    /*cout << date <<  "   " << "String date is size: " << "   " << date.size() <<  endl;
+    system("pause");*/
+    dateInt = stoi(date);
+  //  cout << "Date integer is: " << dateInt << endl;
+
+    return dateInt;
 }

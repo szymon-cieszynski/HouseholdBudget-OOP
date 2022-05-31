@@ -25,8 +25,7 @@ void FileWithIncomesXML::addIncomeToFile(Income income)
     xml.AddElem("Date", income.getDate());
     xml.AddElem("Item", (income.getTypeOfIncome()));
     //xml.AddElem("Amount", AuxillaryMethods::floatToString(income.getAmount()));
-    xml.AddElem("Amount", income.getAmountString()); //konwersja obcinala kwote np. 10.50 zamienial na 10.5
-
+    xml.AddElem("Amount", (income.getAmountString())); //konwersja obcinala kwote np. 10.50 zamienial na 10.5
     xml.Save("incomes.xml");
 }
 
@@ -73,11 +72,11 @@ vector <Income> FileWithIncomesXML::loadIncomesFromFile(int idLoggedUser)
                 income.setTypeOfIncome(item);
 
                 xml.FindElem( "Amount" );
-                float amount = atof(xml.GetData().c_str() );
-                income.setAmount(amount);
+                /*float amount = atof(xml.GetData().c_str() );
+                income.setAmount(amount);*/
 
-                //string amountString = xml.GetData(); //for two characters amount after pointer - for example 10.50
-                //income.setAmountString(amountString);
+                string amountString = xml.GetData(); //for two characters amount after pointer - for example 10.50
+                income.setAmountString(amountString);
 
                 incomes.push_back(income);
             }
