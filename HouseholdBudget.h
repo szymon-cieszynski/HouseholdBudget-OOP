@@ -37,8 +37,12 @@ public:
     void logOut();
     void loadUsersFromFile();
     void loadIncomesFromFile();
-    void showAllUsers();
-    void showAllIncomes();
+    void loadExpensesFromFile();
+
+
+    void showAllUsers(); //func for testing
+    void showAllIncomes(); //func for testing
+    void showAllExpenses(); //func for testing
 
 
 };

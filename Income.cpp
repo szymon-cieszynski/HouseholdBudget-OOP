@@ -2,6 +2,7 @@
 
 using namespace std;
 
+//Setters:
 void Income::setAmount(float newAmount)
 {
     if (newAmount >= 0)
@@ -35,6 +36,14 @@ void Income::setAmountString(string newAmountString)
     amountString = newAmountString;
 }
 
+void Income::setDateInt(int newDateInt)
+{
+    if (newDateInt >= 0)
+    dateInt = newDateInt;
+}
+
+
+//Getters:
 float Income::getAmount()
 {
     return amount;
@@ -63,4 +72,9 @@ int Income::getUserId()
 string Income::getAmountString()
 {
     return amountString;
+}
+
+int Income::getDateInt()
+{
+    return dateInt;
 }

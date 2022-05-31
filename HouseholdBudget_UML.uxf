@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>9</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>36</x>
-      <y>54</y>
-      <w>342</w>
-      <h>333</h>
+      <x>189</x>
+      <y>35</y>
+      <w>266</w>
+      <h>259</h>
     </coordinates>
     <panel_attributes>HouseholdBudget
 --
@@ -29,17 +29,19 @@
 + logOut() : void
 + loadUsersFromFile() : void
 + loadIncomesFromFile() : void
++ loadExpensesFromFile() : void
 + showAllUsers() : void //supporting function
-+ showAllIncomes() : void //supporting function</panel_attributes>
++ showAllIncomes() : void //supporting function
++ showAllExpenses() : void //testing func</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>342</x>
-      <y>738</y>
-      <w>315</w>
-      <h>198</h>
+      <x>427</x>
+      <y>567</y>
+      <w>280</w>
+      <h>189</h>
     </coordinates>
     <panel_attributes>OperationOnDates
 --
@@ -47,23 +49,26 @@
 - month : Integer
 - days : Integer
 --
-- isLeapYear() : bool
-- checkDaysOfMonths() : Integer
+_- isLeapYear() : bool_
+_- checkDaysOfMonths() : Integer_
 
-+ getTodaysDate() : String
-+ loadAndCheckDate(): String
-+ checkDaysOfMonths() : void
-+ compareTwoDates() : void
+_+ loadAndCheckDate(): String_
+_+ getTodaysDate() : String_
+_+ dateStringToInt() : Integer_
+_+ changeCurrentDateToFirstDayOfMonth() : String_
+_+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
+
+//+ compareTwoDates() : void
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>522</x>
-      <y>9</y>
-      <w>189</w>
-      <h>108</h>
+      <x>567</x>
+      <y>0</y>
+      <w>147</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -77,10 +82,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>351</y>
-      <w>495</w>
-      <h>171</h>
+      <x>861</x>
+      <y>259</y>
+      <w>385</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>FileWithUsersXML
 --
@@ -98,10 +103,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>531</y>
-      <w>495</w>
-      <h>171</h>
+      <x>861</x>
+      <y>406</y>
+      <w>385</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>FileWithIncomesXML
 --
@@ -120,10 +125,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>711</y>
-      <w>495</w>
-      <h>171</h>
+      <x>861</x>
+      <y>546</y>
+      <w>385</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>FileWithExpensesXML
 --
@@ -142,10 +147,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>414</x>
-      <y>135</y>
-      <w>459</w>
-      <h>279</h>
+      <x>483</x>
+      <y>98</y>
+      <w>357</w>
+      <h>217</h>
     </coordinates>
     <panel_attributes>UserManager
 --
@@ -174,10 +179,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1188</x>
-      <y>18</y>
-      <w>351</w>
-      <h>180</h>
+      <x>1085</x>
+      <y>7</y>
+      <w>273</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>AuxillaryMethods
 --
@@ -196,18 +201,20 @@ _+ changeFirstLetterToCapitalAndOthersToLower() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>432</y>
-      <w>459</w>
-      <h>279</h>
+      <x>441</x>
+      <y>329</y>
+      <w>357</w>
+      <h>217</h>
     </coordinates>
     <panel_attributes>BudgetManager
 --
-- 
-- 
-- 
+- incomes : vector &lt;Income&gt;
+- expenses : vector &lt;Expense&gt;
+- fileWithIncomesXML : FileWithIncomesXML
+- fileWithExpensesXML : FileWithExpensesXML
 --
-- establishNewIncomeID() : Integer
+- establishNewIncomeIdFromFile() : Integer
+- establishNewExpenseIdFromFile() : Integer
 &lt;&lt;construct&gt;&gt; BudgetManager()
 + addIncome() : void
 + addExpense() : void
@@ -215,6 +222,9 @@ _+ changeFirstLetterToCapitalAndOthersToLower() : String_
 + showBalanceFromPreviousMonth() : void
 + showBalanceFromSelectedPeriod() : void
 + loadIncomesFromFile() : vector &lt;Income&gt;
++ loadExpensesFromFile() : vector &lt;Expense&gt;
++ showAllIncomes() : void //testing func
++ showAllExpenses() : void //testing func
 
 
 </panel_attributes>
@@ -223,16 +233,36 @@ _+ changeFirstLetterToCapitalAndOthersToLower() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>792</x>
-      <y>9</y>
-      <w>189</w>
-      <h>108</h>
+      <x>777</x>
+      <y>0</y>
+      <w>147</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>Income
 --
 - amount : double
 - date : String
+- dateInt: Integer
 - typeOfIncome : String
+- incomeId : Integer
+- userId : Integer
+- amountString : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1281</x>
+      <y>203</y>
+      <w>147</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>Expense
+--
+- amount : double
+- date : String
+- dateInt: Integer
+- typeOfExpense : String
 - incomeId : Integer
 - userId : Integer
 - amountString : String</panel_attributes>

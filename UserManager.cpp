@@ -108,6 +108,7 @@ char UserManager::chooseFromUserMenu()
     cout << "6. Change password" << endl;
     cout << "7. Log out" << endl;
     cout << "8. Show All Incomes" << endl;
+    cout << "9. Show All Expenses" << endl;
     cout << "---------------------------" << endl;
     cout << "Your choice: ";
     choice = AuxillaryMethods::loadCharacter();
@@ -177,10 +178,24 @@ void UserManager::showAllUsers()
     }
 }
 
-
 void UserManager::changePassword()
 {
+    User user;
+    string newPassword = "";
+    cout << "Enter new password: ";
+    cin >> newPassword;
 
+    for (int i = 0; i < users.size(); i++)
+    {
+        if (users[i].getId() == idLoggedUser)
+        {
+            users[i].setPassword(newPassword);
+            cout << "Password has been changed." << endl << endl;
+            system("pause");
+        }
+    }
+    fileWithUsersXML.updatePasswordInFile(user, idLoggedUser);
+    //fileWithUsersXML.updatePasswordInFile(users);
 }
 
 void UserManager::logOut()

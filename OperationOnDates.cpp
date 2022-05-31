@@ -6,41 +6,36 @@ string OperationOnDates::loadAndCheckDate()
 {
     string date = "";
 
-    while(true)
+    time_t theTime = time(NULL);
+    struct tm *aTime = localtime(&theTime);
+    int currentYear = aTime->tm_year + 1900;
+    int currentMonth = aTime->tm_mon + 1;
+
+    while (true)
     {
         cout << endl << "Type date in format YYYY-MM-DD" << endl;
         getline (cin, date);
 
-        bool lapyear = isLeapYear(date);
-
-        string daysOfMonthString = date.substr (8,2);
-        int daysOfMonth = stoi(daysOfMonthString);
-
-        /*cout << daysOfMonth << endl;
-        system("pause");*/
-
-        time_t theTime = time(NULL);
-        struct tm *aTime = localtime(&theTime);
-        int currentYear = aTime->tm_year + 1900;
-        int currentMonth = aTime->tm_mon + 1;
-
-        string yearString = date.substr (0,4);
-        int year = stoi(yearString);
-
-        string monthString = date.substr (5,2);
-        int month = 0;
-        month = stoi(monthString);
-
         if(date[4] == '-' && date[7] == '-' && date.size() == 10)
         {
+            bool lapyear = isLeapYear(date);
+
+            string daysOfMonthString = date.substr (8,2);
+            int daysOfMonth = stoi(daysOfMonthString);
+
+            string yearString = date.substr (0,4);
+            int typedYear = stoi(yearString);
+
+            string monthString = date.substr (5,2);
+            int typedMonth = stoi(monthString);
             if(date[0]!='2')
             {
                 cout << endl << "Earliest year has to be from 2000 year!"  << endl;
                 //break;
             }
-            else if (month > currentMonth || currentYear < year )
+            else if (typedMonth > currentMonth && typedYear >= currentYear || typedYear > currentYear)
             {
-                cout << endl << "You can enter income this month at the latest."  << endl;
+                cout << endl << "You can enter value this month at the latest."  << endl;
             }
             else if (daysOfMonth > checkDaysOfMonths(lapyear, date))
             {
@@ -50,7 +45,6 @@ string OperationOnDates::loadAndCheckDate()
             {
                 return date;
             }
-
         }
         else cout << "Incorrect format of date!" << endl;
     }
@@ -130,5 +124,61 @@ string OperationOnDates::getTodaysDate()
     }
 
     string date = yearString + '-' + monthString + '-' + dayString;
+
     return date;
+}
+
+int OperationOnDates::dateStringToInt(string date)
+{
+    int dateInt = 0;
+    size_t dash_position;
+
+    for(int i = 0 ; i < date.size() ; i++)
+    {
+        if (date.find('-') != string::npos)
+        {
+            dash_position = date.find('-');
+            date.erase(dash_position, 1);
+        }
+    }
+    /*cout << date <<  "   " << "String date is size: " << "   " << date.size() <<  endl;
+    system("pause");*/
+    dateInt = stoi(date);
+  //  cout << "Date integer is: " << dateInt << endl;
+
+    return dateInt;
+}
+
+string OperationOnDates::changeCurrentDateToFirstDayOfMonth(string date)
+{
+    string firstDay = date.replace(8, 2, "01");
+    /*cout << firstDay << endl;
+    system("pause");*/
+
+    return firstDay;
+}
+
+string OperationOnDates::changeCurrentDateToFirstDayOfPreviousMonth(string date)
+{
+
+    time_t theTime = time(NULL);
+    struct tm *aTime = localtime(&theTime);
+    int  previousMonth = aTime->tm_mon;
+    if (previousMonth == 0) previousMonth = 12;
+    string previousMonthString = to_string(previousMonth);
+
+
+    if(previousMonthString.size() == 1)
+    {
+        string zero = "0";
+        previousMonthString.insert(0, zero);
+    }
+
+    string firstDay = date.replace(8, 2, "01");
+    firstDay = date.replace(5, 2, previousMonthString);
+
+    /*cout << firstDay << endl;
+    system("pause");*/
+
+    return firstDay;
 }

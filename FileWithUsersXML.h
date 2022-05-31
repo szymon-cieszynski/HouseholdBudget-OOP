@@ -20,6 +20,8 @@ public:
     //FileWithUsersXML();
     void addUserToFile(User user);
     vector <User> loadUsersFromFile();
+    void updatePasswordInFile(User user, int idLoggedUser);
+    //void updatePasswordInFile(vector <User> &users);
 
 
 };
