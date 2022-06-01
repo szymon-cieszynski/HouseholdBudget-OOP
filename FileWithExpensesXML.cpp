@@ -69,8 +69,6 @@ vector <Expense> FileWithExpensesXML::loadExpensesFromFile(int idLoggedUser)
                 expense.setTypeOfExpense(item);
 
                 xml.FindElem( "Amount" );
-                /*float amount = atof(xml.GetData().c_str() );
-                expense.setAmount(amount);*/
 
                 string amountString = xml.GetData(); //for two characters amount after pointer - for example 10.50
                 expense.setAmountString(amountString);
@@ -79,8 +77,6 @@ vector <Expense> FileWithExpensesXML::loadExpensesFromFile(int idLoggedUser)
             }
             xml.OutOfElem(); //out of Expense - jesli bylo to w ifie to sprawdzal tylko jedno id, nie zwazal na inne
         }
-        /*cout<< expenses.size() << endl;
-        system("pause");*/
     }
     else
     {
@@ -88,4 +84,31 @@ vector <Expense> FileWithExpensesXML::loadExpensesFromFile(int idLoggedUser)
         Sleep(1000);
     }
     return expenses;
+}
+
+int FileWithExpensesXML::establishNewExpenseIdFromFile()
+{
+    int lastExpenseId = 0;
+    CMarkup xml;
+    bool fileExists = xml.Load( "expenses.xml" );
+
+    if (fileExists)
+    {
+        xml.FindElem();
+        xml.IntoElem();
+        while( xml.FindElem("Expense"))
+        {
+            xml.IntoElem();
+            xml.FindElem( "ExpenseId" );
+            lastExpenseId = atoi(xml.GetData().c_str() );
+            xml.OutOfElem();
+        }
+    }
+    else
+    {
+        cout<< "Add first expense to the app" << endl;
+        Sleep(1000);
+        return 1;
+    }
+    return lastExpenseId + 1;
 }

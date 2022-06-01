@@ -14,6 +14,9 @@ class User
     string password;
 
 public:
+    User (int id = 0, string name = "", string lastName = "", string login = "", string password = "")
+    {}
+
     void setId(int newId);
     void setName(string newName);
     void setLastName(string newLastName);

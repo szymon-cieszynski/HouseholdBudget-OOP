@@ -25,7 +25,7 @@ void FileWithIncomesXML::addIncomeToFile(Income income)
     xml.AddElem("Date", income.getDate());
     xml.AddElem("Item", (income.getTypeOfIncome()));
     //xml.AddElem("Amount", AuxillaryMethods::floatToString(income.getAmount()));
-    xml.AddElem("Amount", (income.getAmountString())); //konwersja obcinala kwote np. 10.50 zamienial na 10.5
+    xml.AddElem("Amount", (income.getAmountString())); //better string than float - string doesn't cut zero in the end
     xml.Save("incomes.xml");
 }
 
@@ -78,8 +78,6 @@ vector <Income> FileWithIncomesXML::loadIncomesFromFile(int idLoggedUser)
             }
             xml.OutOfElem(); //out of Income - jesli bylo to w ifie to sprawdzal tylko jedno id, nie zwazal na inne
         }
-        /*cout<< incomes.size() << endl;
-        system("pause");*/
     }
     else
     {
@@ -87,4 +85,31 @@ vector <Income> FileWithIncomesXML::loadIncomesFromFile(int idLoggedUser)
         Sleep(1000);
     }
     return incomes;
+}
+
+int FileWithIncomesXML::establishNewIncomeIdFromFile()
+{
+    int lastIncomeId = 0;
+    CMarkup xml;
+    bool fileExists = xml.Load( "incomes.xml" );
+
+    if (fileExists)
+    {
+        xml.FindElem();
+        xml.IntoElem();
+        while( xml.FindElem("Income"))
+        {
+            xml.IntoElem();
+            xml.FindElem( "IncomeId" );
+            lastIncomeId = atoi(xml.GetData().c_str() );
+            xml.OutOfElem();
+        }
+    }
+    else
+    {
+        cout<< "Add first income to the app" << endl;
+        Sleep(1000);
+        return 1;
+    }
+    return lastIncomeId + 1;
 }

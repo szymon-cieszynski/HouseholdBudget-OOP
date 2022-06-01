@@ -7,7 +7,7 @@ void BudgetManager::addIncome(int idLoggedUser)
 {
     Income income;
 
-    income.setIncomeId(establishNewIncomeIdFromFile());
+    income.setIncomeId(fileWithIncomesXML.establishNewIncomeIdFromFile());
     income.setUserId(idLoggedUser);
 
     string date = "";
@@ -57,38 +57,11 @@ void BudgetManager::addIncome(int idLoggedUser)
 
 }
 
-int BudgetManager::establishNewIncomeIdFromFile()
-{
-    int lastIncomeId = 0;
-    CMarkup xml;
-    bool fileExists = xml.Load( "incomes.xml" );
-
-    if (fileExists)
-    {
-        xml.FindElem();
-        xml.IntoElem();
-        while( xml.FindElem("Income"))
-        {
-            xml.IntoElem();
-            xml.FindElem( "IncomeId" );
-            lastIncomeId = atoi(xml.GetData().c_str() );
-            xml.OutOfElem();
-        }
-    }
-    else
-    {
-        cout<< "Add first income to the app" << endl;
-        Sleep(1000);
-        return 1;
-    }
-    return lastIncomeId + 1;
-}
-
 void BudgetManager::addExpense(int idLoggedUser)
 {
     Expense expense;
 
-    expense.setExpenseId(establishNewExpenseIdFromFile());
+    expense.setExpenseId(fileWithExpensesXML.establishNewExpenseIdFromFile());
     expense.setUserId(idLoggedUser);
 
     string date = "";
@@ -139,32 +112,6 @@ void BudgetManager::addExpense(int idLoggedUser)
 
 }
 
-int BudgetManager::establishNewExpenseIdFromFile()
-{
-    int lastExpenseId = 0;
-    CMarkup xml;
-    bool fileExists = xml.Load( "expenses.xml" );
-
-    if (fileExists)
-    {
-        xml.FindElem();
-        xml.IntoElem();
-        while( xml.FindElem("Expense"))
-        {
-            xml.IntoElem();
-            xml.FindElem( "ExpenseId" );
-            lastExpenseId = atoi(xml.GetData().c_str() );
-            xml.OutOfElem();
-        }
-    }
-    else
-    {
-        cout<< "Add first expense to the app" << endl;
-        Sleep(1000);
-        return 1;
-    }
-    return lastExpenseId + 1;
-}
 
 bool compareIncomes(Income date1, Income date2)
 {
@@ -453,24 +400,10 @@ void BudgetManager::showBalanceFromSelectedPeriod()
     system("pause");
 }
 
-vector <Income> BudgetManager::loadIncomesFromFile(int idLoggedUser)
-{
-    incomes = fileWithIncomesXML.loadIncomesFromFile(idLoggedUser);
-    return incomes;
-}
-
-vector <Expense> BudgetManager::loadExpensesFromFile(int idLoggedUser)
-{
-    expenses = fileWithExpensesXML.loadExpensesFromFile(idLoggedUser);
-    return expenses;
-}
-
 void BudgetManager::showAllIncomes()
 {
     for (int i = 0; i < incomes.size(); i++)
     {
-        /*cout<< incomes.size() << endl;
-        system("pause");*/
         cout << incomes[i].getIncomeId() << endl;
         cout << incomes[i].getUserId() << endl;
         cout << incomes[i].getDate() << endl;
@@ -484,8 +417,6 @@ void BudgetManager::showAllExpenses()
 {
     for (int i = 0; i < expenses.size(); i++)
     {
-        /*cout<< incomes.size() << endl;
-        system("pause");*/
         cout << expenses[i].getExpenseId() << endl;
         cout << expenses[i].getUserId() << endl;
         cout << expenses[i].getDate() << endl;

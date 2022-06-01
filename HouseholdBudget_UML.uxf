@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>7</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>189</x>
-      <y>35</y>
-      <w>266</w>
-      <h>259</h>
+      <x>54</x>
+      <y>45</y>
+      <w>342</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>HouseholdBudget
 --
 - idLoggedUser : Integer
-- NAME_OF_FILE_WITH_USERS : constant String
+- userManager : UserManager
+- *budgetManager : BudgetManager
 --
 &lt;&lt;construct&gt;&gt; HouseholdBudget()
 + registrationOfUser() : void
@@ -27,9 +28,9 @@
 + showBalanceFromSelectedPeriod() : void
 + changePassword() : void
 + logOut() : void
-+ loadUsersFromFile() : void
-+ loadIncomesFromFile() : void
-+ loadExpensesFromFile() : void
+//+ loadUsersFromFile() : void
+//+ loadIncomesFromFile() : void
+//+ loadExpensesFromFile() : void
 + showAllUsers() : void //supporting function
 + showAllIncomes() : void //supporting function
 + showAllExpenses() : void //testing func</panel_attributes>
@@ -38,16 +39,13 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>427</x>
-      <y>567</y>
-      <w>280</w>
-      <h>189</h>
+      <x>360</x>
+      <y>729</y>
+      <w>360</w>
+      <h>243</h>
     </coordinates>
     <panel_attributes>OperationOnDates
 --
-- year : Integer
-- month : Integer
-- days : Integer
 --
 _- isLeapYear() : bool_
 _- checkDaysOfMonths() : Integer_
@@ -65,10 +63,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>567</x>
+      <x>540</x>
       <y>0</y>
-      <w>147</w>
-      <h>84</h>
+      <w>189</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -82,10 +80,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>861</x>
-      <y>259</y>
-      <w>385</w>
-      <h>133</h>
+      <x>918</x>
+      <y>333</y>
+      <w>495</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>FileWithUsersXML
 --
@@ -93,20 +91,20 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
 --
 - getDataOfUSer() : User
 
-&lt;&lt;construct&gt;&gt; FileWithUsersXML()
+//&lt;&lt;construct&gt;&gt; FileWithUsersXML()
 + addUserToFile() : void
 + loadUsersFromFile() : vector &lt;User&gt;
-+ saveAllUsersToFile : void
++ updatePasswordInFile() : void
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>861</x>
-      <y>406</y>
-      <w>385</w>
-      <h>133</h>
+      <x>918</x>
+      <y>522</y>
+      <w>495</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>FileWithIncomesXML
 --
@@ -115,9 +113,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
 - 
 - 
 
-&lt;&lt;construct&gt;&gt; FileWithIncomesXML()
+//&lt;&lt;construct&gt;&gt; FileWithIncomesXML()
 + addIncomeToFile() : void
 + loadIncomesFromFile() : vector &lt;Income&gt;
++ establishNewIncomeIdFromFile() : Integer
 
 </panel_attributes>
     <additional_attributes/>
@@ -125,10 +124,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>861</x>
-      <y>546</y>
-      <w>385</w>
-      <h>133</h>
+      <x>918</x>
+      <y>702</y>
+      <w>495</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>FileWithExpensesXML
 --
@@ -137,9 +136,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
 - 
 - 
 
-&lt;&lt;construct&gt;&gt; FileWithExpensesXML()
+//&lt;&lt;construct&gt;&gt; FileWithExpensesXML()
 + addExpenseToFile() : void
 + loadExpensesFromFile() : vector &lt;Expense&gt;
++ establishNewExpenseIdFromFile() : Integer
 
 </panel_attributes>
     <additional_attributes/>
@@ -147,10 +147,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>483</x>
-      <y>98</y>
-      <w>357</w>
-      <h>217</h>
+      <x>432</x>
+      <y>126</y>
+      <w>459</w>
+      <h>279</h>
     </coordinates>
     <panel_attributes>UserManager
 --
@@ -179,50 +179,48 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1085</x>
-      <y>7</y>
-      <w>273</w>
-      <h>140</h>
+      <x>1044</x>
+      <y>36</y>
+      <w>351</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>AuxillaryMethods
 --
-_+ conversionIntToString() : String_
-_+ getNumber() : String_
-_+ conversionStringtoInt() : Integer_
+_+ loadCharacter() : Char_
+_+ changeFirstLetterToCapitalAndOthersToLower() : String_
 _+ loadLine() : String_
 _+ floatToString() : String_
 _+ checkComma() : String_
-_+ loadCharacter() : Char_
-_+ loadInteger() : Integer_
-_+ changeFirstLetterToCapitalAndOthersToLower() : String_
+
+
+
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>441</x>
-      <y>329</y>
-      <w>357</w>
-      <h>217</h>
+      <x>378</x>
+      <y>423</y>
+      <w>459</w>
+      <h>279</h>
     </coordinates>
     <panel_attributes>BudgetManager
 --
+- ID_OF_LOGGED_USER : Integer
 - incomes : vector &lt;Income&gt;
 - expenses : vector &lt;Expense&gt;
 - fileWithIncomesXML : FileWithIncomesXML
 - fileWithExpensesXML : FileWithExpensesXML
 --
-- establishNewIncomeIdFromFile() : Integer
-- establishNewExpenseIdFromFile() : Integer
 &lt;&lt;construct&gt;&gt; BudgetManager()
 + addIncome() : void
 + addExpense() : void
 + showBalanceFromCurrentMonth() : void
 + showBalanceFromPreviousMonth() : void
 + showBalanceFromSelectedPeriod() : void
-+ loadIncomesFromFile() : vector &lt;Income&gt;
-+ loadExpensesFromFile() : vector &lt;Expense&gt;
+//+ loadIncomesFromFile() : vector &lt;Income&gt;
+//+ loadExpensesFromFile() : vector &lt;Expense&gt;
 + showAllIncomes() : void //testing func
 + showAllExpenses() : void //testing func
 
@@ -233,10 +231,10 @@ _+ changeFirstLetterToCapitalAndOthersToLower() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>777</x>
+      <x>810</x>
       <y>0</y>
-      <w>147</w>
-      <h>98</h>
+      <w>189</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Income
 --
@@ -252,10 +250,10 @@ _+ changeFirstLetterToCapitalAndOthersToLower() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1281</x>
-      <y>203</y>
-      <w>147</w>
-      <h>112</h>
+      <x>1458</x>
+      <y>261</y>
+      <w>189</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>Expense
 --

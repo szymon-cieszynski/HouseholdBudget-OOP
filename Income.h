@@ -16,6 +16,10 @@ class Income
     string amountString;
 
 public:
+    Income (float amount = 0, int dateInt = 0, string date = "", string typeOfIncome = "", int incomeId = 0, int userId = 0, string amountString = "" )
+    {
+
+    }
     void setAmount(float newAmount);
     void setDate(string newDate);
     void setTypeOfIncome(string newTypeOfIncome);

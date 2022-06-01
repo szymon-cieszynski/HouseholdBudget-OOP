@@ -160,11 +160,11 @@ bool UserManager::isUserLoggedIn()
         return false;
 }
 
-vector <User> UserManager::loadUsersFromFile()
+/*vector <User> UserManager::loadUsersFromFile() //transfer to the constructor
 {
     users = fileWithUsersXML.loadUsersFromFile();
     return users;
-}
+}*/
 
 void UserManager::showAllUsers()
 {
@@ -182,7 +182,7 @@ void UserManager::changePassword()
 {
     User user;
     string newPassword = "";
-    cout << "Enter new password: ";
+    cout << endl << "Enter new password: ";
     cin >> newPassword;
 
     for (int i = 0; i < users.size(); i++)
@@ -190,17 +190,18 @@ void UserManager::changePassword()
         if (users[i].getId() == idLoggedUser)
         {
             users[i].setPassword(newPassword);
-            cout << "Password has been changed." << endl << endl;
+            user.setId(idLoggedUser);
+            user.setPassword(newPassword);
+            cout << endl << "Password has been changed." << endl << endl;
             system("pause");
         }
     }
-    fileWithUsersXML.updatePasswordInFile(user, idLoggedUser);
-    //fileWithUsersXML.updatePasswordInFile(users);
+    fileWithUsersXML.updatePasswordInFile(user);
 }
 
 void UserManager::logOut()
 {
-    users.clear();
+    //users.clear();
     idLoggedUser = 0;
 }
 

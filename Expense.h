@@ -16,6 +16,10 @@ class Expense
     string amountString;
 
 public:
+    Expense (float amount = 0, int dateInt = 0, string date = "", string typeOfExpense = "", int expenseId = 0, int userId = 0, string amountString = "" )
+    {
+
+    }
     void setAmount(float newAmount);
     void setDate(string newDate);
     void setTypeOfExpense(string newTypeOfExpense);

@@ -12,15 +12,19 @@ using namespace std;
 class HouseholdBudget
 {
 private:
-    int idLoggedUser;
-    const string NAME_OF_FILE_WITH_USERS;
+    int idLoggedUser = 0;
     UserManager userManager;
-    BudgetManager budgetManager;
+    BudgetManager *budgetManager;
 
 public:
-    HoseholdBudget()
+    HouseholdBudget()
     {
-
+        budgetManager = NULL;
+    };
+    ~HouseholdBudget()
+    {
+        delete budgetManager;
+        budgetManager = NULL;
     };
 
     void registrationOfUser();
@@ -35,9 +39,9 @@ public:
     void showBalanceFromSelectedPeriod();
     void changePassword();
     void logOut();
-    void loadUsersFromFile();
-    void loadIncomesFromFile();
-    void loadExpensesFromFile();
+    //void loadUsersFromFile(); transfer to the constructor
+    //void loadIncomesFromFile();
+    //void loadExpensesFromFile();
 
 
     void showAllUsers(); //func for testing

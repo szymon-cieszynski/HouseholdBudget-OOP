@@ -11,7 +11,7 @@ int main()
     {
         if (!householdBudget.isUserLoggedIn())
         {
-            householdBudget.loadUsersFromFile();
+            //householdBudget.loadUsersFromFile(); transfer to the constructor
             char choice = householdBudget.chooseFromMainMenu();
             switch (choice)
             {
@@ -34,8 +34,8 @@ int main()
         }
         else
         {
-            householdBudget.loadIncomesFromFile();
-            householdBudget.loadExpensesFromFile();
+            //householdBudget.loadIncomesFromFile(); //loading inside class BudgetManager
+            //householdBudget.loadExpensesFromFile();
             char choice = householdBudget.chooseFromUserMenu();
 
             switch (choice)

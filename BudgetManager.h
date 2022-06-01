@@ -17,29 +17,29 @@ using namespace std;
 class BudgetManager
 {
 private:
+    const int ID_OF_LOGGED_USER;
     vector <Income> incomes;
     vector <Expense> expenses;
     FileWithIncomesXML fileWithIncomesXML;
     FileWithExpensesXML fileWithExpensesXML;
 
-    int establishNewIncomeIdFromFile();
-    int establishNewExpenseIdFromFile();
     //const int ID_OF_LOGGED_USER;
     //OperationOnDates operationOnDates;
 
 public:
-    /*BudgetManager(int idLoggedUser) : ID_OF_LOGGED_USER(idLoggedUser)
+    BudgetManager(int idLoggedUser) : ID_OF_LOGGED_USER(idLoggedUser)
     {
-
-    };*/
+        incomes = fileWithIncomesXML.loadIncomesFromFile(ID_OF_LOGGED_USER);
+        expenses = fileWithExpensesXML.loadExpensesFromFile(ID_OF_LOGGED_USER);
+    };
 
     void addIncome(int idLoggedUser);
     void addExpense(int idLoggedUser);
     void showBalanceFromCurrentMonth();
     void showBalanceFromPreviousMonth();
     void showBalanceFromSelectedPeriod();
-    vector <Income> loadIncomesFromFile(int idLoggedUser);
-    vector <Expense> loadExpensesFromFile(int idLoggedUser);
+    //vector <Income> loadIncomesFromFile(int idLoggedUser);
+    //vector <Expense> loadExpensesFromFile(int idLoggedUser);
 
     void showAllIncomes();
     void showAllExpenses();

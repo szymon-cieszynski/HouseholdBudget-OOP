@@ -10,6 +10,10 @@ void HouseholdBudget::registrationOfUser()
 void HouseholdBudget::logIn()
 {
     idLoggedUser = userManager.logIn();
+    if (idLoggedUser > 0) //instead method "isUserLoggedIn()
+    {
+        budgetManager = new BudgetManager(idLoggedUser); //creating object of class BudgetManager when logged in (also loading incomes and expenses!!)
+    }
 }
 
 bool HouseholdBudget::isUserLoggedIn()
@@ -29,27 +33,27 @@ char HouseholdBudget::chooseFromUserMenu()
 
 void HouseholdBudget::addIncome()
 {
-    budgetManager.addIncome(idLoggedUser);
+    budgetManager -> addIncome(idLoggedUser);
 }
 
 void HouseholdBudget::addExpense()
 {
-    budgetManager.addExpense(idLoggedUser);
+    budgetManager -> addExpense(idLoggedUser);
 }
 
 void HouseholdBudget::showBalanceFromCurrentMonth()
 {
-    budgetManager.showBalanceFromCurrentMonth();
+    budgetManager -> showBalanceFromCurrentMonth();
 }
 
 void HouseholdBudget::showBalanceFromPreviousMonth()
 {
-    budgetManager.showBalanceFromPreviousMonth();
+    budgetManager -> showBalanceFromPreviousMonth();
 }
 
 void HouseholdBudget::showBalanceFromSelectedPeriod()
 {
-    budgetManager.showBalanceFromSelectedPeriod();
+    budgetManager -> showBalanceFromSelectedPeriod();
 }
 
 void HouseholdBudget::changePassword()
@@ -60,23 +64,25 @@ void HouseholdBudget::changePassword()
 void HouseholdBudget::logOut()
 {
     userManager.logOut();
+    delete budgetManager;
+    budgetManager = NULL;
 }
 
 
-void HouseholdBudget::loadUsersFromFile()
+/*void HouseholdBudget::loadUsersFromFile() transfer to the constructor userManager
 {
     userManager.loadUsersFromFile();
-}
+}*/
 
-void HouseholdBudget::loadIncomesFromFile()
+/*void HouseholdBudget::loadIncomesFromFile()
 {
-    budgetManager.loadIncomesFromFile(idLoggedUser);
+    budgetManager -> loadIncomesFromFile(); // -> because of pointer new
 }
 
 void HouseholdBudget::loadExpensesFromFile()
 {
-    budgetManager.loadExpensesFromFile(idLoggedUser);
-}
+    budgetManager -> loadExpensesFromFile();
+}*/
 
 void HouseholdBudget::showAllUsers()
 {
@@ -85,10 +91,10 @@ void HouseholdBudget::showAllUsers()
 
 void HouseholdBudget::showAllIncomes()
 {
-    budgetManager.showAllIncomes();
+    budgetManager -> showAllIncomes();
 }
 
 void HouseholdBudget::showAllExpenses()
 {
-    budgetManager.showAllExpenses();
+    budgetManager -> showAllExpenses();
 }

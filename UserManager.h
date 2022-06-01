@@ -26,7 +26,7 @@ public:
     UserManager()
     {
         idLoggedUser = 0;
-        //users = fileWithUsersXML.loadUsersFromFile();
+        users = fileWithUsersXML.loadUsersFromFile();
     };
 
     void registrationOfUser();
@@ -34,7 +34,7 @@ public:
     char chooseFromUserMenu();
     int logIn();
     bool isUserLoggedIn();
-    vector <User> loadUsersFromFile();
+    //vector <User> loadUsersFromFile(); transfer to the constructor
     void showAllUsers(); //supporting funcion!
     void changePassword();
     void logOut();

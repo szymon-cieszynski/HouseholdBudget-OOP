@@ -19,6 +19,7 @@ public:
     //FileWithUsersXML();
     void addExpenseToFile(Expense expense);
     vector <Expense> loadExpensesFromFile(int idLoggedUser);
+    int establishNewExpenseIdFromFile();
 
 
 };

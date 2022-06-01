@@ -31,7 +31,6 @@ string OperationOnDates::loadAndCheckDate()
             if(date[0]!='2')
             {
                 cout << endl << "Earliest year has to be from 2000 year!"  << endl;
-                //break;
             }
             else if (typedMonth > currentMonth && typedYear >= currentYear || typedYear > currentYear)
             {
@@ -76,8 +75,6 @@ int OperationOnDates::checkDaysOfMonths(bool lapyear, string date)
     }
     else
         return days = 31;
-
-    // cout<< "This month has: " << days << " days" << endl;
 }
 
 bool OperationOnDates::isLeapYear(string date)
@@ -89,12 +86,10 @@ bool OperationOnDates::isLeapYear(string date)
     bool leapyear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     if (leapyear == true)
     {
-        // cout<< "This year is leapyear." << endl;
         return true;
     }
     else
     {
-        //cout<< "This year is NOT leapyear." << endl;
         return false;
     }
 }
@@ -141,20 +136,13 @@ int OperationOnDates::dateStringToInt(string date)
             date.erase(dash_position, 1);
         }
     }
-    /*cout << date <<  "   " << "String date is size: " << "   " << date.size() <<  endl;
-    system("pause");*/
     dateInt = stoi(date);
-  //  cout << "Date integer is: " << dateInt << endl;
-
     return dateInt;
 }
 
 string OperationOnDates::changeCurrentDateToFirstDayOfMonth(string date)
 {
     string firstDay = date.replace(8, 2, "01");
-    /*cout << firstDay << endl;
-    system("pause");*/
-
     return firstDay;
 }
 
@@ -173,12 +161,8 @@ string OperationOnDates::changeCurrentDateToFirstDayOfPreviousMonth(string date)
         string zero = "0";
         previousMonthString.insert(0, zero);
     }
-
     string firstDay = date.replace(8, 2, "01");
     firstDay = date.replace(5, 2, previousMonthString);
-
-    /*cout << firstDay << endl;
-    system("pause");*/
 
     return firstDay;
 }
