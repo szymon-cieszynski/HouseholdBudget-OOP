@@ -39,15 +39,6 @@ public:
     void showBalanceFromSelectedPeriod();
     void changePassword();
     void logOut();
-    //void loadUsersFromFile(); transfer to the constructor
-    //void loadIncomesFromFile();
-    //void loadExpensesFromFile();
-
-
-    void showAllUsers(); //func for testing
-    void showAllIncomes(); //func for testing
-    void showAllExpenses(); //func for testing
-
 
 };
 

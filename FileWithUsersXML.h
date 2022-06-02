@@ -1,4 +1,3 @@
-//W jezyku XML tagi definiuja strukture i znaczenie danych: mowia, czym sa okreslone dane.
 #ifndef FILEWITHUSERSXML_H
 #define FILEWITHUSERSXML_H
 
@@ -17,7 +16,6 @@ private:
     void getDataOfUser();
 
 public:
-    //FileWithUsersXML();
     void addUserToFile(User user);
     vector <User> loadUsersFromFile();
     void updatePasswordInFile(User user);

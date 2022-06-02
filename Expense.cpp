@@ -32,11 +32,6 @@ void Expense::setUserId(int newUserId)
     userId = newUserId;
 }
 
-void Expense::setAmountString(string newAmountString)
-{
-    amountString = newAmountString;
-}
-
 void Expense::setDateInt(int newDateInt)
 {
     if (newDateInt >= 0)
@@ -67,11 +62,6 @@ int Expense::getExpenseId()
 int Expense::getUserId()
 {
     return userId;
-}
-
-string Expense::getAmountString()
-{
-    return amountString;
 }
 
 int Expense::getDateInt()

@@ -93,12 +93,11 @@ void FileWithUsersXML::updatePasswordInFile(User user)
             int userId = atoi(xml.GetData().c_str());
             if(user.getId() == userId)
             {
-                //xml.ResetMainPos();
                 xml.FindElem("Password");
                 xml.SetData(user.getPassword());
                 xml.Save("users.xml");
             }
-            xml.OutOfElem(); //out of User - jesli bylo to w ifie to sprawdzal tylko jedno id, nie zwazal na inne
+            xml.OutOfElem(); //out of User - for checking others id
         }
     }
     else

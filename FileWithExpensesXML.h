@@ -13,10 +13,8 @@ using namespace std;
 class FileWithExpensesXML
 {
 private:
-    //void getDataOfUser();
 
 public:
-    //FileWithUsersXML();
     void addExpenseToFile(Expense expense);
     vector <Expense> loadExpensesFromFile(int idLoggedUser);
     int establishNewExpenseIdFromFile();

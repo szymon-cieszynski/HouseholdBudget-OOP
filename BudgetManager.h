@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm> //for sort
+#include <windows.h>
 
 #include "Income.h"
 #include "Expense.h"
@@ -23,9 +24,6 @@ private:
     FileWithIncomesXML fileWithIncomesXML;
     FileWithExpensesXML fileWithExpensesXML;
 
-    //const int ID_OF_LOGGED_USER;
-    //OperationOnDates operationOnDates;
-
 public:
     BudgetManager(int idLoggedUser) : ID_OF_LOGGED_USER(idLoggedUser)
     {
@@ -38,11 +36,7 @@ public:
     void showBalanceFromCurrentMonth();
     void showBalanceFromPreviousMonth();
     void showBalanceFromSelectedPeriod();
-    //vector <Income> loadIncomesFromFile(int idLoggedUser);
-    //vector <Expense> loadExpensesFromFile(int idLoggedUser);
 
-    void showAllIncomes();
-    void showAllExpenses();
 };
 
 

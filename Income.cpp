@@ -31,11 +31,6 @@ void Income::setUserId(int newUserId)
     userId = newUserId;
 }
 
-void Income::setAmountString(string newAmountString)
-{
-    amountString = newAmountString;
-}
-
 void Income::setDateInt(int newDateInt)
 {
     if (newDateInt >= 0)
@@ -67,11 +62,6 @@ int Income::getIncomeId()
 int Income::getUserId()
 {
     return userId;
-}
-
-string Income::getAmountString()
-{
-    return amountString;
 }
 
 int Income::getDateInt()

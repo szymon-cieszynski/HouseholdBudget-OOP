@@ -84,7 +84,6 @@ char UserManager::chooseFromMainMenu()
     cout << "---------------------------" << endl;
     cout << "1. Registration" << endl;
     cout << "2. Login" << endl;
-    cout << "3. Show all users" << endl;
     cout << "9. End of work" << endl;
     cout << "---------------------------" << endl;
     cout << "Your choice: ";
@@ -107,8 +106,6 @@ char UserManager::chooseFromUserMenu()
     cout << "5. Balance from selected time period" << endl;
     cout << "6. Change password" << endl;
     cout << "7. Log out" << endl;
-    cout << "8. Show All Incomes" << endl;
-    cout << "9. Show All Expenses" << endl;
     cout << "---------------------------" << endl;
     cout << "Your choice: ";
     choice = AuxillaryMethods::loadCharacter();
@@ -160,27 +157,8 @@ bool UserManager::isUserLoggedIn()
         return false;
 }
 
-/*vector <User> UserManager::loadUsersFromFile() //transfer to the constructor
-{
-    users = fileWithUsersXML.loadUsersFromFile();
-    return users;
-}*/
-
-void UserManager::showAllUsers()
-{
-    for (int i = 0; i < users.size(); i++)
-    {
-        cout << users[i].getId() << endl;
-        cout << users[i].getLogin() << endl;
-        cout << users[i].getName() << endl;
-        cout << users[i].getLastName() << endl;
-        cout << users[i].getPassword() << endl;
-    }
-}
-
 void UserManager::changePassword()
 {
-    User user;
     string newPassword = "";
     cout << endl << "Enter new password: ";
     cin >> newPassword;
@@ -190,18 +168,15 @@ void UserManager::changePassword()
         if (users[i].getId() == idLoggedUser)
         {
             users[i].setPassword(newPassword);
-            user.setId(idLoggedUser);
-            user.setPassword(newPassword);
+            fileWithUsersXML.updatePasswordInFile(users[i]);
             cout << endl << "Password has been changed." << endl << endl;
             system("pause");
         }
     }
-    fileWithUsersXML.updatePasswordInFile(user);
 }
 
 void UserManager::logOut()
 {
-    //users.clear();
     idLoggedUser = 0;
 }
 

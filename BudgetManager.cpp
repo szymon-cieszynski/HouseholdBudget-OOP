@@ -1,5 +1,6 @@
 #include "BudgetManager.h"
 #include <windows.h> //function Sleep
+#include <iomanip> // function setprecision()
 
 using namespace std;
 
@@ -47,7 +48,8 @@ void BudgetManager::addIncome(int idLoggedUser)
 
     cin >> amountString;
     amountString = AuxillaryMethods::checkComma(amountString);
-    income.setAmountString(amountString);
+    float amount = stof(amountString);
+    income.setAmount(amount);
 
     incomes.push_back(income);
     fileWithIncomesXML.addIncomeToFile(income);
@@ -102,8 +104,9 @@ void BudgetManager::addExpense(int idLoggedUser)
     amountString = AuxillaryMethods::loadLine();
 
     amountString = AuxillaryMethods::checkComma(amountString);
+    float amount = stof(amountString);
+    expense.setAmount(amount);
 
-    expense.setAmountString(amountString);
     fileWithExpensesXML.addExpenseToFile(expense);
     expenses.push_back(expense);
 
@@ -126,186 +129,208 @@ bool compareExpenses(Expense date1, Expense date2)
 void BudgetManager::showBalanceFromCurrentMonth()
 {
     int dateInt = 0;
-
-    //convert dates in vector incomes from string to int:
-    for (int i = 0; i < incomes.size(); i++)
+    if (incomes.empty() && expenses.empty())
     {
-        dateInt = OperationOnDates::dateStringToInt(incomes[i].getDate());
-        incomes[i].setDateInt(dateInt);
+        cout << "You don't have any incomes or expenses." << endl;
+        Sleep(1200);
     }
-
-    //sorting by date from earliest to latest:
-    sort(incomes.begin(), incomes.end(), compareIncomes);
-
-    int firstDayOfCurrentMonth = 0;
-    string currentDate = OperationOnDates::getTodaysDate();
-    string firstDay = OperationOnDates::changeCurrentDateToFirstDayOfMonth(currentDate);
-
-    firstDayOfCurrentMonth = OperationOnDates::dateStringToInt(firstDay);
-
-    //printing on screen:
-    system("cls");
-    float sumIncomes = 0;
-    if (!incomes.empty())
+    else
     {
-        cout << "        >>> Balance from current month. <<<" << endl;
-        cout << "         Incomes: " << endl;
-        cout << "-----------------------------------------------" << endl;
+        //convert dates in vector incomes from string to int:
         for (int i = 0; i < incomes.size(); i++)
         {
-            if(incomes[i].getDateInt() >= firstDayOfCurrentMonth)
-            {
-                cout << "Income Id:              " << incomes[i].getIncomeId() << endl;
-                cout << "Date:                   " << incomes[i].getDate() << endl;
-                cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
-                cout << "Amount:                 " << incomes[i].getAmountString() << endl;
-                sumIncomes += stof(incomes[i].getAmountString());
-                system("pause");
-            }
+            dateInt = OperationOnDates::dateStringToInt(incomes[i].getDate());
+            incomes[i].setDateInt(dateInt);
         }
-        cout << endl;
-    }
-    else
-    {
-        cout << endl << "You don't have incomes yet." << endl << endl;
-        system("pause");
-    }
 
-    //convert dates in vector expenses from string to int:
-    for (int i = 0; i < expenses.size(); i++)
-    {
-        dateInt = OperationOnDates::dateStringToInt(expenses[i].getDate());
-        expenses[i].setDateInt(dateInt);
-    }
+        //sorting by date from earliest to latest:
+        sort(incomes.begin(), incomes.end(), compareIncomes);
 
-    //sorting by date from earliest to latest:
-    sort(expenses.begin(), expenses.end(), compareExpenses);
+        int firstDayOfCurrentMonth = 0;
+        string currentDate = OperationOnDates::getTodaysDate();
+        string firstDay = OperationOnDates::changeCurrentDateToFirstDayOfMonth(currentDate);
 
-    //printing on screen:
-    float sumExpenses = 0;
-    if (!expenses.empty())
-    {
-        cout << "         Expenses: " << endl;
-        cout << "-----------------------------------------------" << endl;
+        firstDayOfCurrentMonth = OperationOnDates::dateStringToInt(firstDay);
+
+        //printing on screen:
+        system("cls");
+        float sumIncomes = 0;
+        if (!incomes.empty())
+        {
+            cout << "        >>> Balance from current month. <<<" << endl;
+            cout << "         Incomes: " << endl;
+            cout << "-----------------------------------------------" << endl;
+            for (int i = 0; i < incomes.size(); i++)
+            {
+                if(incomes[i].getDateInt() >= firstDayOfCurrentMonth)
+                {
+                    cout << endl;
+                    cout << "Date:                   " << incomes[i].getDate() << endl;
+                    cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
+                    cout << "Amount:                 " << fixed << setprecision(2) << incomes[i].getAmount() << endl;
+                    cout << endl;
+                    sumIncomes += incomes[i].getAmount();
+                }
+                else
+                {
+                    cout << endl << "No incomes to show from current month." << endl;
+                    break;
+                }
+            }
+            cout << endl;
+        }
+
+        //convert dates in vector expenses from string to int:
         for (int i = 0; i < expenses.size(); i++)
         {
-            if(expenses[i].getDateInt() >= firstDayOfCurrentMonth)
-            {
-                cout << "Expense Id:             " << expenses[i].getExpenseId() << endl;
-                cout << "Date:                   " << expenses[i].getDate() << endl;
-                cout << "Item:                   " << expenses[i].getTypeOfExpense() << endl;
-                cout << "Amount:                 " << expenses[i].getAmountString() << endl;
-                sumExpenses += stof(expenses[i].getAmountString());
-                system("pause");
-            }
+            dateInt = OperationOnDates::dateStringToInt(expenses[i].getDate());
+            expenses[i].setDateInt(dateInt);
         }
-        cout << endl;
-    }
-    else
-    {
-        cout << endl << "You don't have expenses yet." << endl << endl;
-        system("pause");
-    }
 
-    cout << endl << "Sum of incomes:                            " << sumIncomes << endl;
-    cout << endl << "Sum of expenses:                           " << sumExpenses << endl;
-    cout << endl << "Difference between incomes and expenses:   " << sumIncomes - sumExpenses << endl << endl;
-    system("pause");
+        //sorting by date from earliest to latest:
+        sort(expenses.begin(), expenses.end(), compareExpenses);
+
+        //printing on screen:
+        float sumExpenses = 0;
+        if (!expenses.empty())
+        {
+            cout << "         Expenses: " << endl;
+            cout << "-----------------------------------------------" << endl;
+            for (int i = 0; i < expenses.size(); i++)
+            {
+                if(expenses[i].getDateInt() >= firstDayOfCurrentMonth)
+                {
+                    cout << endl;
+                    cout << "Date:                   " << expenses[i].getDate() << endl;
+                    cout << "Item:                   " << expenses[i].getTypeOfExpense() << endl;
+                    cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
+                    cout << endl;
+                    sumExpenses += expenses[i].getAmount();
+                }
+                else
+                {
+                    cout << endl <<  "No expenses to show from current month." << endl << endl;
+                    system("pause");
+                    break;
+                }
+            }
+            cout << endl;
+        }
+
+        if(sumExpenses != 0 && sumIncomes != 0)
+        {
+            cout << endl << "Sum of incomes:                            " << sumIncomes << endl;
+            cout << endl << "Sum of expenses:                           " << sumExpenses << endl;
+            cout << endl << "Difference between incomes and expenses:   " << sumIncomes - sumExpenses << endl << endl;
+            system("pause");
+        }
+    }
 }
 
 void BudgetManager::showBalanceFromPreviousMonth()
 {
     int dateInt = 0;
-
-    //convert dates in vector incomes from string to int:
-    for (int i = 0; i < incomes.size(); i++)
+    if (incomes.empty() && expenses.empty())
     {
-        dateInt = OperationOnDates::dateStringToInt(incomes[i].getDate());
-        incomes[i].setDateInt(dateInt);
+        cout << "You don't have any incomes or expenses." << endl;
+        Sleep(1200);
     }
-
-    //sorting by date from earliest to latest:
-    sort(incomes.begin(), incomes.end(), compareIncomes);
-
-    int firstDayOfCurrentMonth = 0;
-    string currentDate = OperationOnDates::getTodaysDate();
-
-    string firstDayThisMonth = OperationOnDates::changeCurrentDateToFirstDayOfMonth(currentDate);
-    firstDayOfCurrentMonth = OperationOnDates::dateStringToInt(firstDayThisMonth);
-
-    int firstDayOfPreviousMonth = 0;
-    string firstDayPrevMonth = OperationOnDates::changeCurrentDateToFirstDayOfPreviousMonth(currentDate);
-
-    firstDayOfPreviousMonth = OperationOnDates::dateStringToInt(firstDayPrevMonth);
-
-    //printing on screen:
-    system("cls");
-    float sumIncomes = 0;
-    if (!incomes.empty())
+    else
     {
-        cout << "        >>> Balance from previous month. <<<" << endl;
-        cout << "         Incomes: " << endl;
-        cout << "-----------------------------------------------" << endl;
+//convert dates in vector incomes from string to int:
         for (int i = 0; i < incomes.size(); i++)
         {
-            if(incomes[i].getDateInt() >= firstDayOfPreviousMonth && incomes[i].getDateInt() < firstDayOfCurrentMonth)
-            {
-                cout << "Income Id:              " << incomes[i].getIncomeId() << endl;
-                cout << "Date:                   " << incomes[i].getDate() << endl;
-                cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
-                cout << "Amount:                 " << incomes[i].getAmountString() << endl;
-                sumIncomes += stof(incomes[i].getAmountString());
-                system("pause");
-            }
+            dateInt = OperationOnDates::dateStringToInt(incomes[i].getDate());
+            incomes[i].setDateInt(dateInt);
         }
-        cout << endl;
-    }
-    else
-    {
-        cout << endl << "You don't have incomes yet." << endl << endl;
-        system("pause");
-    }
 
-    //convert dates in vector expenses from string to int:
-    for (int i = 0; i < expenses.size(); i++)
-    {
-        dateInt = OperationOnDates::dateStringToInt(expenses[i].getDate());
-        expenses[i].setDateInt(dateInt);
-    }
+        //sorting by date from earliest to latest:
+        sort(incomes.begin(), incomes.end(), compareIncomes);
 
-    //sorting by date from earliest to latest:
-    sort(expenses.begin(), expenses.end(), compareExpenses);
+        int firstDayOfCurrentMonth = 0;
+        string currentDate = OperationOnDates::getTodaysDate();
 
-    //printing on screen:
-    float sumExpenses = 0;
-    if (!expenses.empty())
-    {
-        cout << "         Expenses: " << endl;
-        cout << "-----------------------------------------------" << endl;
+        string firstDayThisMonth = OperationOnDates::changeCurrentDateToFirstDayOfMonth(currentDate);
+        firstDayOfCurrentMonth = OperationOnDates::dateStringToInt(firstDayThisMonth);
+
+        int firstDayOfPreviousMonth = 0;
+        string firstDayPrevMonth = OperationOnDates::changeCurrentDateToFirstDayOfPreviousMonth(currentDate);
+
+        firstDayOfPreviousMonth = OperationOnDates::dateStringToInt(firstDayPrevMonth);
+
+        //printing on screen:
+        system("cls");
+        float sumIncomes = 0;
+        if (!incomes.empty())
+        {
+            cout << "        >>> Balance from previous month. <<<" << endl;
+            cout << "         Incomes: " << endl;
+            cout << "-----------------------------------------------" << endl;
+            for (int i = 0; i < incomes.size(); i++)
+            {
+                if(incomes[i].getDateInt() >= firstDayOfPreviousMonth && incomes[i].getDateInt() < firstDayOfCurrentMonth)
+                {
+                    cout << endl;
+                    cout << "Date:                   " << incomes[i].getDate() << endl;
+                    cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
+                    cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
+                    cout << endl;
+                    sumIncomes += incomes[i].getAmount();
+                }
+                else
+                {
+                    cout << endl << "No incomes to show from previous month." << endl;
+                    break;
+                }
+            }
+            cout << endl;
+        }
+
+        //convert dates in vector expenses from string to int:
         for (int i = 0; i < expenses.size(); i++)
         {
-            if(expenses[i].getDateInt() >= firstDayOfPreviousMonth && expenses[i].getDateInt() < firstDayOfCurrentMonth)
-            {
-                cout << "Expense Id:             " << expenses[i].getExpenseId() << endl;
-                cout << "Date:                   " << expenses[i].getDate() << endl;
-                cout << "Item:                   " << expenses[i].getTypeOfExpense() << endl;
-                cout << "Amount:                 " << expenses[i].getAmountString() << endl;
-                sumExpenses += stof(expenses[i].getAmountString());
-                system("pause");
-            }
+            dateInt = OperationOnDates::dateStringToInt(expenses[i].getDate());
+            expenses[i].setDateInt(dateInt);
         }
-        cout << endl;
-    }
-    else
-    {
-        cout << endl << "You don't have expenses yet." << endl << endl;
-        system("pause");
-    }
 
-    cout << endl << "Sum of incomes:                            " << sumIncomes << endl;
-    cout << endl << "Sum of expenses:                           " << sumExpenses << endl;
-    cout << endl << "Difference between incomes and expenses:   " << sumIncomes - sumExpenses << endl << endl;
-    system("pause");
+        //sorting by date from earliest to latest:
+        sort(expenses.begin(), expenses.end(), compareExpenses);
+
+        //printing on screen:
+        float sumExpenses = 0;
+        if (!expenses.empty())
+        {
+            cout << "         Expenses: " << endl;
+            cout << "-----------------------------------------------" << endl;
+            for (int i = 0; i < expenses.size(); i++)
+            {
+                if(expenses[i].getDateInt() >= firstDayOfPreviousMonth && expenses[i].getDateInt() < firstDayOfCurrentMonth)
+                {
+                    cout << endl;
+                    cout << "Date:                   " << expenses[i].getDate() << endl;
+                    cout << "Item:                   " << expenses[i].getTypeOfExpense() << endl;
+                    cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
+                    cout << endl;
+                    sumExpenses += expenses[i].getAmount();
+                }
+                else
+                {
+                    cout << endl << "No expenses to show from previous month." << endl << endl;
+                    system("pause");
+                    break;
+                }
+            }
+            cout << endl;
+        }
+
+        if(sumExpenses != 0 && sumIncomes != 0)
+        {
+            cout << endl << "Sum of incomes:                            " << sumIncomes << endl;
+            cout << endl << "Sum of expenses:                           " << sumExpenses << endl;
+            cout << endl << "Difference between incomes and expenses:   " << sumIncomes - sumExpenses << endl << endl;
+            system("pause");
+        }
+    }
 }
 
 void BudgetManager::showBalanceFromSelectedPeriod()
@@ -314,114 +339,108 @@ void BudgetManager::showBalanceFromSelectedPeriod()
     string date1 = "";
     string date2 = "";
 
-    date1 = OperationOnDates::loadAndCheckDate();
-    date2 = OperationOnDates::loadAndCheckDate();
-
-    //convert dates in vector incomes from string to int:
-    for (int i = 0; i < incomes.size(); i++)
+    if (incomes.empty() && expenses.empty())
     {
-        dateInt = OperationOnDates::dateStringToInt(incomes[i].getDate());
-        incomes[i].setDateInt(dateInt);
+        cout << "You don't have any incomes or expenses." << endl;
+        Sleep(1200);
     }
-
-    //sorting by date from earliest to latest:
-    sort(incomes.begin(), incomes.end(), compareIncomes);
-
-    int date1Integer = OperationOnDates::dateStringToInt(date1);
-    int date2Integer = OperationOnDates::dateStringToInt(date2);
-
-    //printing on screen:
-    system("cls");
-    float sumIncomes = 0;
-    if (!incomes.empty())
+    else
     {
-        cout << "        >>> Balance from selected period. <<<" << endl;
-        cout << "         Incomes: " << endl;
-        cout << "-----------------------------------------------" << endl;
+        date1 = OperationOnDates::loadAndCheckDate();
+        date2 = OperationOnDates::loadAndCheckDate();
+        //convert dates in vector incomes from string to int:
         for (int i = 0; i < incomes.size(); i++)
         {
-            if(incomes[i].getDateInt() >= date1Integer && incomes[i].getDateInt() <= date2Integer)
-            {
-                cout << "Income Id:              " << incomes[i].getIncomeId() << endl;
-                cout << "Date:                   " << incomes[i].getDate() << endl;
-                cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
-                cout << "Amount:                 " << incomes[i].getAmountString() << endl;
-                sumIncomes += stof(incomes[i].getAmountString());
-                system("pause");
-            }
+            dateInt = OperationOnDates::dateStringToInt(incomes[i].getDate());
+            incomes[i].setDateInt(dateInt);
         }
-        cout << endl;
-    }
-    else
-    {
-        cout << endl << "You don't have incomes yet." << endl << endl;
-        system("pause");
-    }
 
-    //convert dates in vector expenses from string to int:
-    for (int i = 0; i < expenses.size(); i++)
-    {
-        dateInt = OperationOnDates::dateStringToInt(expenses[i].getDate());
-        expenses[i].setDateInt(dateInt);
-    }
+        //sorting by date from earliest to latest:
+        sort(incomes.begin(), incomes.end(), compareIncomes);
 
-    //sorting by date from earliest to latest:
-    sort(expenses.begin(), expenses.end(), compareExpenses);
+        int date1Integer = OperationOnDates::dateStringToInt(date1);
+        int date2Integer = OperationOnDates::dateStringToInt(date2);
 
-    //printing on screen:
-    float sumExpenses = 0;
-    if (!expenses.empty())
-    {
-        cout << "         Expenses: " << endl;
-        cout << "-----------------------------------------------" << endl;
-        for (int i = 0; i < expenses.size(); i++)
+        if (date1Integer > date2Integer)
         {
-            if(expenses[i].getDateInt() >= date1Integer && expenses[i].getDateInt() <= date2Integer)
+            cout << "Invalid dates! Please enter earlier date first!" << endl;
+            system("pause");
+        }
+        else
+        {
+            //printing on screen:
+            system("cls");
+            float sumIncomes = 0;
+            if (!incomes.empty())
             {
-                cout << "Expense Id:             " << expenses[i].getExpenseId() << endl;
-                cout << "Date:                   " << expenses[i].getDate() << endl;
-                cout << "Item:                   " << expenses[i].getTypeOfExpense() << endl;
-                cout << "Amount:                 " << expenses[i].getAmountString() << endl;
-                sumExpenses += stof(expenses[i].getAmountString());
+                cout << "        >>> Balance from selected period. <<<" << endl;
+                cout << "         Incomes: " << endl;
+                cout << "-----------------------------------------------" << endl;
+                for (int i = 0; i < incomes.size(); i++)
+                {
+                    if(incomes[i].getDateInt() >= date1Integer && incomes[i].getDateInt() <= date2Integer)
+                    {
+                        cout << endl;
+                        cout << "Date:                   " << incomes[i].getDate() << endl;
+                        cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
+                        cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
+                        cout << endl;
+                        sumIncomes += incomes[i].getAmount();
+                    }
+                    else
+                    {
+                        cout << endl << "No incomes to show from selected period." << endl;
+                        break;
+                    }
+                }
+                cout << endl;
+            }
+
+            //convert dates in vector expenses from string to int:
+            for (int i = 0; i < expenses.size(); i++)
+            {
+                dateInt = OperationOnDates::dateStringToInt(expenses[i].getDate());
+                expenses[i].setDateInt(dateInt);
+            }
+
+            //sorting by date from earliest to latest:
+            sort(expenses.begin(), expenses.end(), compareExpenses);
+
+            //printing on screen:
+            float sumExpenses = 0;
+            if (!expenses.empty())
+            {
+                cout << "         Expenses: " << endl;
+                cout << "-----------------------------------------------" << endl;
+                for (int i = 0; i < expenses.size(); i++)
+                {
+                    if(expenses[i].getDateInt() >= date1Integer && expenses[i].getDateInt() <= date2Integer)
+                    {
+                        cout << endl;
+                        cout << "Date:                   " << expenses[i].getDate() << endl;
+                        cout << "Item:                   " << expenses[i].getTypeOfExpense() << endl;
+                        cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
+                        cout << endl;
+                        sumExpenses += expenses[i].getAmount();
+                    }
+                    else
+                    {
+                        cout << endl << "No expenses to show from selected period." << endl << endl;
+                        system("pause");
+                        break;
+                    }
+                }
+                cout << endl;
+            }
+
+            if(sumExpenses != 0 && sumIncomes != 0)
+            {
+                cout << endl << "Sum of incomes:                            " << sumIncomes << endl;
+                cout << endl << "Sum of expenses:                           " << sumExpenses << endl;
+                cout << endl << "Difference between incomes and expenses:   " << sumIncomes - sumExpenses << endl << endl;
                 system("pause");
             }
+
         }
-        cout << endl;
-    }
-    else
-    {
-        cout << endl << "You don't have expenses yet." << endl << endl;
-        system("pause");
-    }
-
-    cout << endl << "Sum of incomes:                            " << sumIncomes << endl;
-    cout << endl << "Sum of expenses:                           " << sumExpenses << endl;
-    cout << endl << "Difference between incomes and expenses:   " << sumIncomes - sumExpenses << endl << endl;
-    system("pause");
-}
-
-void BudgetManager::showAllIncomes()
-{
-    for (int i = 0; i < incomes.size(); i++)
-    {
-        cout << incomes[i].getIncomeId() << endl;
-        cout << incomes[i].getUserId() << endl;
-        cout << incomes[i].getDate() << endl;
-        cout << incomes[i].getTypeOfIncome() << endl;
-        cout << incomes[i].getAmountString() << endl;
-        system("pause");
-    }
-}
-
-void BudgetManager::showAllExpenses()
-{
-    for (int i = 0; i < expenses.size(); i++)
-    {
-        cout << expenses[i].getExpenseId() << endl;
-        cout << expenses[i].getUserId() << endl;
-        cout << expenses[i].getDate() << endl;
-        cout << expenses[i].getTypeOfExpense() << endl;
-        cout << expenses[i].getAmountString() << endl;
-        system("pause");
     }
 }

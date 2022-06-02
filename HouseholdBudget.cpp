@@ -10,7 +10,7 @@ void HouseholdBudget::registrationOfUser()
 void HouseholdBudget::logIn()
 {
     idLoggedUser = userManager.logIn();
-    if (idLoggedUser > 0) //instead method "isUserLoggedIn()
+    if (userManager.isUserLoggedIn())
     {
         budgetManager = new BudgetManager(idLoggedUser); //creating object of class BudgetManager when logged in (also loading incomes and expenses!!)
     }
@@ -66,35 +66,4 @@ void HouseholdBudget::logOut()
     userManager.logOut();
     delete budgetManager;
     budgetManager = NULL;
-}
-
-
-/*void HouseholdBudget::loadUsersFromFile() transfer to the constructor userManager
-{
-    userManager.loadUsersFromFile();
-}*/
-
-/*void HouseholdBudget::loadIncomesFromFile()
-{
-    budgetManager -> loadIncomesFromFile(); // -> because of pointer new
-}
-
-void HouseholdBudget::loadExpensesFromFile()
-{
-    budgetManager -> loadExpensesFromFile();
-}*/
-
-void HouseholdBudget::showAllUsers()
-{
-    userManager.showAllUsers();
-}
-
-void HouseholdBudget::showAllIncomes()
-{
-    budgetManager -> showAllIncomes();
-}
-
-void HouseholdBudget::showAllExpenses()
-{
-    budgetManager -> showAllExpenses();
 }

@@ -34,8 +34,6 @@ public:
     char chooseFromUserMenu();
     int logIn();
     bool isUserLoggedIn();
-    //vector <User> loadUsersFromFile(); transfer to the constructor
-    void showAllUsers(); //supporting funcion!
     void changePassword();
     void logOut();
 

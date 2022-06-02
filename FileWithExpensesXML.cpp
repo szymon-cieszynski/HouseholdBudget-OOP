@@ -1,6 +1,4 @@
 #include "FileWithExpensesXML.h"
-#include <windows.h>
-
 
 using namespace std;
 
@@ -24,8 +22,7 @@ void FileWithExpensesXML::addExpenseToFile(Expense expense)
     xml.AddElem("UserId", expense.getUserId());
     xml.AddElem("Date", expense.getDate());
     xml.AddElem("Item", (expense.getTypeOfExpense()));
-    //xml.AddElem("Amount", AuxillaryMethods::floatToString(expense.getAmount()));
-    xml.AddElem("Amount", expense.getAmountString()); //konwersja obcinala kwote np. 10.50 zamienial na 10.5
+    xml.AddElem("Amount", AuxillaryMethods::floatToString(expense.getAmount()));
 
     xml.Save("expenses.xml");
 }
@@ -69,19 +66,13 @@ vector <Expense> FileWithExpensesXML::loadExpensesFromFile(int idLoggedUser)
                 expense.setTypeOfExpense(item);
 
                 xml.FindElem( "Amount" );
-
-                string amountString = xml.GetData(); //for two characters amount after pointer - for example 10.50
-                expense.setAmountString(amountString);
+                float amount = atof(xml.GetData().c_str() );
+                expense.setAmount(amount);
 
                 expenses.push_back(expense);
             }
-            xml.OutOfElem(); //out of Expense - jesli bylo to w ifie to sprawdzal tylko jedno id, nie zwazal na inne
+            xml.OutOfElem(); //out of Expense - for checking other id's
         }
-    }
-    else
-    {
-        cout<< "Add first expense" << endl;
-        Sleep(1000);
     }
     return expenses;
 }
@@ -106,8 +97,6 @@ int FileWithExpensesXML::establishNewExpenseIdFromFile()
     }
     else
     {
-        cout<< "Add first expense to the app" << endl;
-        Sleep(1000);
         return 1;
     }
     return lastExpenseId + 1;

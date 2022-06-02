@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>9</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>54</x>
-      <y>45</y>
-      <w>342</w>
-      <h>360</h>
+      <x>119</x>
+      <y>56</y>
+      <w>266</w>
+      <h>224</h>
     </coordinates>
     <panel_attributes>HouseholdBudget
 --
@@ -27,22 +27,16 @@
 + showBalanceFromPreviousMonth() : void
 + showBalanceFromSelectedPeriod() : void
 + changePassword() : void
-+ logOut() : void
-//+ loadUsersFromFile() : void
-//+ loadIncomesFromFile() : void
-//+ loadExpensesFromFile() : void
-+ showAllUsers() : void //supporting function
-+ showAllIncomes() : void //supporting function
-+ showAllExpenses() : void //testing func</panel_attributes>
++ logOut() : void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>729</y>
-      <w>360</w>
-      <h>243</h>
+      <x>371</x>
+      <y>532</y>
+      <w>280</w>
+      <h>147</h>
     </coordinates>
     <panel_attributes>OperationOnDates
 --
@@ -63,10 +57,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
-      <y>0</y>
-      <w>189</w>
-      <h>108</h>
+      <x>497</x>
+      <y>21</y>
+      <w>147</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -80,10 +74,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>918</x>
-      <y>333</y>
-      <w>495</w>
-      <h>171</h>
+      <x>791</x>
+      <y>280</y>
+      <w>385</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>FileWithUsersXML
 --
@@ -101,10 +95,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>918</x>
-      <y>522</y>
-      <w>495</w>
-      <h>171</h>
+      <x>791</x>
+      <y>427</y>
+      <w>385</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>FileWithIncomesXML
 --
@@ -124,10 +118,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>918</x>
-      <y>702</y>
-      <w>495</w>
-      <h>171</h>
+      <x>791</x>
+      <y>567</y>
+      <w>385</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>FileWithExpensesXML
 --
@@ -147,10 +141,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>432</x>
-      <y>126</y>
-      <w>459</w>
-      <h>279</h>
+      <x>413</x>
+      <y>119</y>
+      <w>357</w>
+      <h>217</h>
     </coordinates>
     <panel_attributes>UserManager
 --
@@ -179,10 +173,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1044</x>
-      <y>36</y>
-      <w>351</w>
-      <h>126</h>
+      <x>889</x>
+      <y>49</y>
+      <w>273</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>AuxillaryMethods
 --
@@ -200,10 +194,10 @@ _+ checkComma() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>378</x>
-      <y>423</y>
-      <w>459</w>
-      <h>279</h>
+      <x>371</x>
+      <y>350</y>
+      <w>357</w>
+      <h>161</h>
     </coordinates>
     <panel_attributes>BudgetManager
 --
@@ -219,10 +213,6 @@ _+ checkComma() : String_
 + showBalanceFromCurrentMonth() : void
 + showBalanceFromPreviousMonth() : void
 + showBalanceFromSelectedPeriod() : void
-//+ loadIncomesFromFile() : vector &lt;Income&gt;
-//+ loadExpensesFromFile() : vector &lt;Expense&gt;
-+ showAllIncomes() : void //testing func
-+ showAllExpenses() : void //testing func
 
 
 </panel_attributes>
@@ -231,39 +221,37 @@ _+ checkComma() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>0</y>
-      <w>189</w>
-      <h>126</h>
+      <x>707</x>
+      <y>21</y>
+      <w>147</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>Income
 --
-- amount : double
+- amount : float
 - date : String
 - dateInt: Integer
 - typeOfIncome : String
 - incomeId : Integer
-- userId : Integer
-- amountString : String</panel_attributes>
+- userId : Integer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1458</x>
-      <y>261</y>
-      <w>189</w>
-      <h>144</h>
+      <x>889</x>
+      <y>161</y>
+      <w>147</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>Expense
 --
-- amount : double
+- amount : float
 - date : String
 - dateInt: Integer
 - typeOfExpense : String
 - incomeId : Integer
-- userId : Integer
-- amountString : String</panel_attributes>
+- userId : Integer</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

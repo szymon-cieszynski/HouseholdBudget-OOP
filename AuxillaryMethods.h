@@ -14,10 +14,6 @@ class AuxillaryMethods
     static string loadLine();
     static string floatToString(float amount);
     static string checkComma(string amountString);
-    //static double stringToFloat(string amountString);
-    /*static int wczytajLiczbeCalkowita();*/
-
-
 };
 
 #endif

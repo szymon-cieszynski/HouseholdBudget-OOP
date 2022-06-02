@@ -13,10 +13,8 @@ using namespace std;
 class FileWithIncomesXML
 {
 private:
-    //void getDataOfUser();
 
 public:
-    //FileWithUsersXML();
     void addIncomeToFile(Income income);
     vector <Income> loadIncomesFromFile(int idLoggedUser);
     int establishNewIncomeIdFromFile();

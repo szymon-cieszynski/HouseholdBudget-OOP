@@ -1,6 +1,4 @@
 #include "FileWithIncomesXML.h"
-#include <windows.h>
-
 
 using namespace std;
 
@@ -24,8 +22,7 @@ void FileWithIncomesXML::addIncomeToFile(Income income)
     xml.AddElem("UserId", income.getUserId());
     xml.AddElem("Date", income.getDate());
     xml.AddElem("Item", (income.getTypeOfIncome()));
-    //xml.AddElem("Amount", AuxillaryMethods::floatToString(income.getAmount()));
-    xml.AddElem("Amount", (income.getAmountString())); //better string than float - string doesn't cut zero in the end
+    xml.AddElem("Amount", AuxillaryMethods::floatToString(income.getAmount()));
     xml.Save("incomes.xml");
 }
 
@@ -68,21 +65,13 @@ vector <Income> FileWithIncomesXML::loadIncomesFromFile(int idLoggedUser)
                 income.setTypeOfIncome(item);
 
                 xml.FindElem( "Amount" );
-                /*float amount = atof(xml.GetData().c_str() );
-                income.setAmount(amount);*/
-
-                string amountString = xml.GetData(); //for two characters amount after pointer - for example 10.50
-                income.setAmountString(amountString);
+                float amount = atof(xml.GetData().c_str() );
+                income.setAmount(amount);
 
                 incomes.push_back(income);
             }
-            xml.OutOfElem(); //out of Income - jesli bylo to w ifie to sprawdzal tylko jedno id, nie zwazal na inne
+            xml.OutOfElem(); //out of Income - for checking other id's
         }
-    }
-    else
-    {
-        cout<< "Add first income" << endl;
-        Sleep(1000);
     }
     return incomes;
 }
@@ -107,8 +96,6 @@ int FileWithIncomesXML::establishNewIncomeIdFromFile()
     }
     else
     {
-        cout<< "Add first income to the app" << endl;
-        Sleep(1000);
         return 1;
     }
     return lastIncomeId + 1;
