@@ -65,7 +65,7 @@ vector <Income> FileWithIncomesXML::loadIncomesFromFile(int idLoggedUser)
                 income.setTypeOfIncome(item);
 
                 xml.FindElem( "Amount" );
-                float amount = atof(xml.GetData().c_str() );
+                float amount = stof(xml.GetData().c_str() );
                 income.setAmount(amount);
 
                 incomes.push_back(income);

@@ -13,7 +13,7 @@ void UserManager::registrationOfUser()
     fileWithUsersXML.addUserToFile(user);
 
     cout << endl << "Your account is created successfully!" << endl << endl;
-    system("pause");
+    Sleep(800);
 }
 
 

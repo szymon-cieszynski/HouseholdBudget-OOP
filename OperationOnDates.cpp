@@ -16,7 +16,7 @@ string OperationOnDates::loadAndCheckDate()
         cout << endl << "Type date in format YYYY-MM-DD" << endl;
         getline (cin, date);
 
-        if(date[4] == '-' && date[7] == '-' && date.size() == 10)
+        if(date[4] == '-' && date[7] == '-' && date.size() == 10 )
         {
             bool lapyear = isLeapYear(date);
 
@@ -32,7 +32,11 @@ string OperationOnDates::loadAndCheckDate()
             {
                 cout << endl << "Earliest year has to be from 2000 year!"  << endl;
             }
-            else if (typedMonth > currentMonth && typedYear >= currentYear || typedYear > currentYear)
+            else if (typedMonth > 12)
+            {
+                cout << endl << "Incorrect month!"  << endl;
+            }
+            else if (typedMonth > currentMonth && typedYear >= currentYear || typedYear > currentYear )
             {
                 cout << endl << "You can enter value this month at the latest."  << endl;
             }

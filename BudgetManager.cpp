@@ -133,6 +133,7 @@ void BudgetManager::showBalanceFromCurrentMonth()
     {
         cout << "You don't have any incomes or expenses." << endl;
         Sleep(1200);
+
     }
     else
     {
@@ -153,10 +154,12 @@ void BudgetManager::showBalanceFromCurrentMonth()
         firstDayOfCurrentMonth = OperationOnDates::dateStringToInt(firstDay);
 
         //printing on screen:
-        system("cls");
         float sumIncomes = 0;
+        bool flag1 = true;
+        system("cls");
         if (!incomes.empty())
         {
+
             cout << "        >>> Balance from current month. <<<" << endl;
             cout << "         Incomes: " << endl;
             cout << "-----------------------------------------------" << endl;
@@ -170,14 +173,15 @@ void BudgetManager::showBalanceFromCurrentMonth()
                     cout << "Amount:                 " << fixed << setprecision(2) << incomes[i].getAmount() << endl;
                     cout << endl;
                     sumIncomes += incomes[i].getAmount();
-                }
-                else
-                {
-                    cout << endl << "No incomes to show from current month." << endl;
-                    break;
+                    flag1 = false;
                 }
             }
             cout << endl;
+            if(flag1 == true)
+            {
+                cout  << "No incomes to show from current month." << endl << endl;
+                system("pause");
+            }
         }
 
         //convert dates in vector expenses from string to int:
@@ -192,6 +196,7 @@ void BudgetManager::showBalanceFromCurrentMonth()
 
         //printing on screen:
         float sumExpenses = 0;
+        bool flag2 = true;
         if (!expenses.empty())
         {
             cout << "         Expenses: " << endl;
@@ -206,18 +211,18 @@ void BudgetManager::showBalanceFromCurrentMonth()
                     cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
                     cout << endl;
                     sumExpenses += expenses[i].getAmount();
-                }
-                else
-                {
-                    cout << endl <<  "No expenses to show from current month." << endl << endl;
-                    system("pause");
-                    break;
+                    flag2 = false;
                 }
             }
             cout << endl;
+            if(flag2 == true)
+            {
+                cout << "No expenses to show from current month." << endl << endl;
+                system("pause");
+            }
         }
 
-        if(sumExpenses != 0 && sumIncomes != 0)
+        if(flag1 == false || flag2 == false)
         {
             cout << endl << "Sum of incomes:                            " << sumIncomes << endl;
             cout << endl << "Sum of expenses:                           " << sumExpenses << endl;
@@ -237,7 +242,7 @@ void BudgetManager::showBalanceFromPreviousMonth()
     }
     else
     {
-//convert dates in vector incomes from string to int:
+        //convert dates in vector incomes from string to int:
         for (int i = 0; i < incomes.size(); i++)
         {
             dateInt = OperationOnDates::dateStringToInt(incomes[i].getDate());
@@ -261,6 +266,7 @@ void BudgetManager::showBalanceFromPreviousMonth()
         //printing on screen:
         system("cls");
         float sumIncomes = 0;
+        bool flag1 = true;
         if (!incomes.empty())
         {
             cout << "        >>> Balance from previous month. <<<" << endl;
@@ -273,17 +279,18 @@ void BudgetManager::showBalanceFromPreviousMonth()
                     cout << endl;
                     cout << "Date:                   " << incomes[i].getDate() << endl;
                     cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
-                    cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
+                    cout << "Amount:                 " << fixed << setprecision(2) << incomes[i].getAmount() << endl;
                     cout << endl;
                     sumIncomes += incomes[i].getAmount();
-                }
-                else
-                {
-                    cout << endl << "No incomes to show from previous month." << endl;
-                    break;
+                    flag1 = false;
                 }
             }
             cout << endl;
+            if(flag1 == true)
+            {
+                cout << "No incomes to show from previous month." << endl << endl;
+                system("pause");
+            }
         }
 
         //convert dates in vector expenses from string to int:
@@ -298,6 +305,7 @@ void BudgetManager::showBalanceFromPreviousMonth()
 
         //printing on screen:
         float sumExpenses = 0;
+        bool flag2 = true;
         if (!expenses.empty())
         {
             cout << "         Expenses: " << endl;
@@ -312,18 +320,17 @@ void BudgetManager::showBalanceFromPreviousMonth()
                     cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
                     cout << endl;
                     sumExpenses += expenses[i].getAmount();
-                }
-                else
-                {
-                    cout << endl << "No expenses to show from previous month." << endl << endl;
-                    system("pause");
-                    break;
+                    flag2 = false;
                 }
             }
             cout << endl;
+            if(flag2 == true)
+            {
+                cout << "No expenses to show from previous month." << endl << endl;
+                system("pause");
+            }
         }
-
-        if(sumExpenses != 0 && sumIncomes != 0)
+        if(flag1 == false || flag2 == false)
         {
             cout << endl << "Sum of incomes:                            " << sumIncomes << endl;
             cout << endl << "Sum of expenses:                           " << sumExpenses << endl;
@@ -361,7 +368,7 @@ void BudgetManager::showBalanceFromSelectedPeriod()
         int date1Integer = OperationOnDates::dateStringToInt(date1);
         int date2Integer = OperationOnDates::dateStringToInt(date2);
 
-        if (date1Integer > date2Integer)
+        if (date1Integer >= date2Integer)
         {
             cout << "Invalid dates! Please enter earlier date first!" << endl;
             system("pause");
@@ -371,6 +378,7 @@ void BudgetManager::showBalanceFromSelectedPeriod()
             //printing on screen:
             system("cls");
             float sumIncomes = 0;
+            bool flag1 = true;
             if (!incomes.empty())
             {
                 cout << "        >>> Balance from selected period. <<<" << endl;
@@ -383,17 +391,18 @@ void BudgetManager::showBalanceFromSelectedPeriod()
                         cout << endl;
                         cout << "Date:                   " << incomes[i].getDate() << endl;
                         cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
-                        cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
+                        cout << "Amount:                 " << fixed << setprecision(2) << incomes[i].getAmount() << endl;
                         cout << endl;
                         sumIncomes += incomes[i].getAmount();
-                    }
-                    else
-                    {
-                        cout << endl << "No incomes to show from selected period." << endl;
-                        break;
+                        flag1 = false;
                     }
                 }
                 cout << endl;
+                if(flag1 == true)
+                {
+                    cout << "No incomes to show from selected time." << endl << endl;
+                    system("pause");
+                }
             }
 
             //convert dates in vector expenses from string to int:
@@ -408,6 +417,7 @@ void BudgetManager::showBalanceFromSelectedPeriod()
 
             //printing on screen:
             float sumExpenses = 0;
+            bool flag2 = true;
             if (!expenses.empty())
             {
                 cout << "         Expenses: " << endl;
@@ -422,25 +432,23 @@ void BudgetManager::showBalanceFromSelectedPeriod()
                         cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
                         cout << endl;
                         sumExpenses += expenses[i].getAmount();
-                    }
-                    else
-                    {
-                        cout << endl << "No expenses to show from selected period." << endl << endl;
-                        system("pause");
-                        break;
+                        flag2 = false;
                     }
                 }
                 cout << endl;
+                if(flag2 == true)
+                {
+                    cout << "No expenses to show from selected time." << endl << endl;
+                    system("pause");
+                }
             }
-
-            if(sumExpenses != 0 && sumIncomes != 0)
+            if(flag1 == false || flag2 == false)
             {
                 cout << endl << "Sum of incomes:                            " << sumIncomes << endl;
                 cout << endl << "Sum of expenses:                           " << sumExpenses << endl;
                 cout << endl << "Difference between incomes and expenses:   " << sumIncomes - sumExpenses << endl << endl;
                 system("pause");
             }
-
         }
     }
 }

@@ -19,6 +19,7 @@ class BudgetManager
 {
 private:
     const int ID_OF_LOGGED_USER;
+    int idLoggedUser;
     vector <Income> incomes;
     vector <Expense> expenses;
     FileWithIncomesXML fileWithIncomesXML;
@@ -36,7 +37,6 @@ public:
     void showBalanceFromCurrentMonth();
     void showBalanceFromPreviousMonth();
     void showBalanceFromSelectedPeriod();
-
 };
 
 
