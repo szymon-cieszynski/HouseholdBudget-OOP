@@ -4,12 +4,12 @@
 
 using namespace std;
 
-void BudgetManager::addIncome(int idLoggedUser)
+void BudgetManager::addIncome(unsigned int idLoggedUser)
 {
-    Income income;
+    IncomeExpense incomeExpense;
 
-    income.setIncomeId(fileWithIncomesXML.establishNewIncomeIdFromFile());
-    income.setUserId(idLoggedUser);
+    incomeExpense.setOperationId(fileWithIncomesXML.establishNewIncomeIdFromFile());
+    incomeExpense.setUserId(idLoggedUser);
 
     string date = "";
 
@@ -23,12 +23,12 @@ void BudgetManager::addIncome(int idLoggedUser)
         case 'y':
             flag = false;
             date = OperationOnDates::getTodaysDate();
-            income.setDate(date);
+            incomeExpense.setDate(date);
             break;
         case 'n':
             flag = false;
             date = OperationOnDates::loadAndCheckDate();
-            income.setDate(date);
+            incomeExpense.setDate(date);
             break;
         default:
             cout << endl << "There is no option like this." << endl << endl;
@@ -41,7 +41,7 @@ void BudgetManager::addIncome(int idLoggedUser)
     cout<< "What kind of income is this?" << endl;
 
     typeOfIncome = AuxillaryMethods::loadLine();
-    income.setTypeOfIncome(typeOfIncome);
+    incomeExpense.setTypeOfItem(typeOfIncome);
 
     string amountString = "";
     cout<< "How many is that?" << endl;
@@ -49,22 +49,22 @@ void BudgetManager::addIncome(int idLoggedUser)
     cin >> amountString;
     amountString = AuxillaryMethods::checkComma(amountString);
     float amount = stof(amountString);
-    income.setAmount(amount);
+    incomeExpense.setAmount(amount);
 
-    incomes.push_back(income);
-    fileWithIncomesXML.addIncomeToFile(income);
+    incomes.push_back(incomeExpense);
+    fileWithIncomesXML.addIncomeToFile(incomeExpense);
 
     cout << endl << "Your income is added successfully!" << endl << endl;
     system("pause");
 
 }
 
-void BudgetManager::addExpense(int idLoggedUser)
+void BudgetManager::addExpense(unsigned int idLoggedUser)
 {
-    Expense expense;
+    IncomeExpense incomeExpense;
 
-    expense.setExpenseId(fileWithExpensesXML.establishNewExpenseIdFromFile());
-    expense.setUserId(idLoggedUser);
+    incomeExpense.setOperationId(fileWithExpensesXML.establishNewExpenseIdFromFile());
+    incomeExpense.setUserId(idLoggedUser);
 
     string date = "";
     bool flag = true;
@@ -78,12 +78,12 @@ void BudgetManager::addExpense(int idLoggedUser)
         case 'y':
             flag = false;
             date = OperationOnDates::getTodaysDate();
-            expense.setDate(date);
+            incomeExpense.setDate(date);
             break;
         case 'n':
             flag = false;
             date = OperationOnDates::loadAndCheckDate();
-            expense.setDate(date);
+            incomeExpense.setDate(date);
             break;
         default:
             cout << endl << "There is no option like this." << endl << endl;
@@ -96,7 +96,7 @@ void BudgetManager::addExpense(int idLoggedUser)
     cout<< "What kind of expense is this?" << endl;
 
     typeOfExpense = AuxillaryMethods::loadLine();
-    expense.setTypeOfExpense(typeOfExpense);
+    incomeExpense.setTypeOfItem(typeOfExpense);
 
     string amountString = "";
     cout<< "How many is that?" << endl;
@@ -105,23 +105,17 @@ void BudgetManager::addExpense(int idLoggedUser)
 
     amountString = AuxillaryMethods::checkComma(amountString);
     float amount = stof(amountString);
-    expense.setAmount(amount);
+    incomeExpense.setAmount(amount);
 
-    fileWithExpensesXML.addExpenseToFile(expense);
-    expenses.push_back(expense);
+    fileWithExpensesXML.addExpenseToFile(incomeExpense);
+    expenses.push_back(incomeExpense);
 
     cout << endl << "Your expense is added successfully!" << endl << endl;
     system("pause");
 
 }
 
-
-bool compareIncomes(Income date1, Income date2)
-{
-    return (date1.getDateInt() < date2.getDateInt());
-}
-
-bool compareExpenses(Expense date1, Expense date2)
+bool compare(IncomeExpense date1, IncomeExpense date2)
 {
     return (date1.getDateInt() < date2.getDateInt());
 }
@@ -145,7 +139,7 @@ void BudgetManager::showBalanceFromCurrentMonth()
         }
 
         //sorting by date from earliest to latest:
-        sort(incomes.begin(), incomes.end(), compareIncomes);
+        sort(incomes.begin(), incomes.end(), compare);
 
         int firstDayOfCurrentMonth = 0;
         string currentDate = OperationOnDates::getTodaysDate();
@@ -169,7 +163,7 @@ void BudgetManager::showBalanceFromCurrentMonth()
                 {
                     cout << endl;
                     cout << "Date:                   " << incomes[i].getDate() << endl;
-                    cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
+                    cout << "Item:                   " << incomes[i].getTypeOfItem() << endl;
                     cout << "Amount:                 " << fixed << setprecision(2) << incomes[i].getAmount() << endl;
                     cout << endl;
                     sumIncomes += incomes[i].getAmount();
@@ -192,7 +186,7 @@ void BudgetManager::showBalanceFromCurrentMonth()
         }
 
         //sorting by date from earliest to latest:
-        sort(expenses.begin(), expenses.end(), compareExpenses);
+        sort(expenses.begin(), expenses.end(), compare);
 
         //printing on screen:
         float sumExpenses = 0;
@@ -207,7 +201,7 @@ void BudgetManager::showBalanceFromCurrentMonth()
                 {
                     cout << endl;
                     cout << "Date:                   " << expenses[i].getDate() << endl;
-                    cout << "Item:                   " << expenses[i].getTypeOfExpense() << endl;
+                    cout << "Item:                   " << expenses[i].getTypeOfItem() << endl;
                     cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
                     cout << endl;
                     sumExpenses += expenses[i].getAmount();
@@ -250,7 +244,7 @@ void BudgetManager::showBalanceFromPreviousMonth()
         }
 
         //sorting by date from earliest to latest:
-        sort(incomes.begin(), incomes.end(), compareIncomes);
+        sort(incomes.begin(), incomes.end(), compare);
 
         int firstDayOfCurrentMonth = 0;
         string currentDate = OperationOnDates::getTodaysDate();
@@ -278,7 +272,7 @@ void BudgetManager::showBalanceFromPreviousMonth()
                 {
                     cout << endl;
                     cout << "Date:                   " << incomes[i].getDate() << endl;
-                    cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
+                    cout << "Item:                   " << incomes[i].getTypeOfItem() << endl;
                     cout << "Amount:                 " << fixed << setprecision(2) << incomes[i].getAmount() << endl;
                     cout << endl;
                     sumIncomes += incomes[i].getAmount();
@@ -301,7 +295,7 @@ void BudgetManager::showBalanceFromPreviousMonth()
         }
 
         //sorting by date from earliest to latest:
-        sort(expenses.begin(), expenses.end(), compareExpenses);
+        sort(expenses.begin(), expenses.end(), compare);
 
         //printing on screen:
         float sumExpenses = 0;
@@ -316,7 +310,7 @@ void BudgetManager::showBalanceFromPreviousMonth()
                 {
                     cout << endl;
                     cout << "Date:                   " << expenses[i].getDate() << endl;
-                    cout << "Item:                   " << expenses[i].getTypeOfExpense() << endl;
+                    cout << "Item:                   " << expenses[i].getTypeOfItem() << endl;
                     cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
                     cout << endl;
                     sumExpenses += expenses[i].getAmount();
@@ -363,7 +357,7 @@ void BudgetManager::showBalanceFromSelectedPeriod()
         }
 
         //sorting by date from earliest to latest:
-        sort(incomes.begin(), incomes.end(), compareIncomes);
+        sort(incomes.begin(), incomes.end(), compare);
 
         int date1Integer = OperationOnDates::dateStringToInt(date1);
         int date2Integer = OperationOnDates::dateStringToInt(date2);
@@ -390,7 +384,7 @@ void BudgetManager::showBalanceFromSelectedPeriod()
                     {
                         cout << endl;
                         cout << "Date:                   " << incomes[i].getDate() << endl;
-                        cout << "Item:                   " << incomes[i].getTypeOfIncome() << endl;
+                        cout << "Item:                   " << incomes[i].getTypeOfItem() << endl;
                         cout << "Amount:                 " << fixed << setprecision(2) << incomes[i].getAmount() << endl;
                         cout << endl;
                         sumIncomes += incomes[i].getAmount();
@@ -413,7 +407,7 @@ void BudgetManager::showBalanceFromSelectedPeriod()
             }
 
             //sorting by date from earliest to latest:
-            sort(expenses.begin(), expenses.end(), compareExpenses);
+            sort(expenses.begin(), expenses.end(), compare);
 
             //printing on screen:
             float sumExpenses = 0;
@@ -428,7 +422,7 @@ void BudgetManager::showBalanceFromSelectedPeriod()
                     {
                         cout << endl;
                         cout << "Date:                   " << expenses[i].getDate() << endl;
-                        cout << "Item:                   " << expenses[i].getTypeOfExpense() << endl;
+                        cout << "Item:                   " << expenses[i].getTypeOfItem() << endl;
                         cout << "Amount:                 " << fixed << setprecision(2) << expenses[i].getAmount() << endl;
                         cout << endl;
                         sumExpenses += expenses[i].getAmount();

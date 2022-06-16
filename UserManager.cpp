@@ -62,11 +62,11 @@ int UserManager::establishNewUserID()
         return users.back().getId() + 1;
 }
 
-bool UserManager::isLoginExist(string login)
+bool UserManager::isLoginExist(const string &login)
 {
-    for (int i = 0; i < users.size(); i++)
+    for (User &user : users ) //"range loop"
     {
-        if (users[i].getLogin() == login)
+        if (user.getLogin() == login)
         {
             cout << endl << "User with this login already exist." << endl;
             return true;
@@ -151,7 +151,7 @@ int UserManager::logIn()
 
 bool UserManager::isUserLoggedIn()
 {
-    if (idLoggedUser > 0)
+    if (idLoggedUser > INVALID_USER)
         return true;
     else
         return false;

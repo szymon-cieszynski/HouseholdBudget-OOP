@@ -6,21 +6,14 @@
 #include "UserManager.h"
 #include "BudgetManager.h"
 
-using namespace std;
-
-
 class HouseholdBudget
 {
-private:
-    int idLoggedUser = 0;
-    UserManager userManager;
-    BudgetManager *budgetManager;
-
 public:
-    HouseholdBudget()
-    {
-        budgetManager = NULL;
-    };
+    HouseholdBudget() :
+    idLoggedUser(0),
+    userManager(),
+    budgetManager(NULL)
+    {};
     ~HouseholdBudget()
     {
         delete budgetManager;
@@ -39,6 +32,11 @@ public:
     void showBalanceFromSelectedPeriod();
     void changePassword();
     void logOut();
+
+private:
+    unsigned int idLoggedUser;
+    UserManager userManager;
+    BudgetManager *budgetManager;
 
 };
 

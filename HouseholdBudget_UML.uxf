@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>5</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>255</x>
-      <y>295</y>
-      <w>190</w>
-      <h>160</h>
+      <x>102</x>
+      <y>312</y>
+      <w>228</w>
+      <h>192</h>
     </coordinates>
     <panel_attributes>HouseholdBudget
 --
@@ -33,10 +33,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>465</x>
-      <y>300</y>
-      <w>200</w>
-      <h>90</h>
+      <x>354</x>
+      <y>318</y>
+      <w>240</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>OperationOnDates
 --
@@ -57,10 +57,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>825</x>
-      <y>35</y>
-      <w>105</w>
-      <h>60</h>
+      <x>786</x>
+      <y>0</y>
+      <w>126</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -74,10 +74,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>895</x>
-      <y>185</y>
-      <w>295</w>
-      <h>70</h>
+      <x>870</x>
+      <y>180</y>
+      <w>354</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>FileWithUsersXML
 --
@@ -94,17 +94,17 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>800</x>
-      <y>545</y>
-      <w>190</w>
-      <h>60</h>
+      <x>756</x>
+      <y>612</y>
+      <w>228</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>FileWithIncomesXML
 --
 
 --
 + addIncomeToFile() : void
-+ loadIncomesFromFile() : vector &lt;Income&gt;
++ loadIncomesFromFile() : vector &lt;IncomeExpense&gt;
 + establishNewIncomeIdFromFile() : Integer
 
 </panel_attributes>
@@ -113,17 +113,17 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>440</y>
-      <w>210</w>
-      <h>60</h>
+      <x>804</x>
+      <y>486</y>
+      <w>252</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>FileWithExpensesXML
 --
 
 --
 + addExpenseToFile() : void
-+ loadExpensesFromFile() : vector &lt;Expense&gt;
++ loadExpensesFromFile() : vector &lt;IncomeExpense&gt;
 + establishNewExpenseIdFromFile() : Integer
 
 </panel_attributes>
@@ -132,10 +132,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>585</x>
-      <y>125</y>
-      <w>255</w>
-      <h>155</h>
+      <x>498</x>
+      <y>108</y>
+      <w>306</w>
+      <h>186</h>
     </coordinates>
     <panel_attributes>UserManager
 --
@@ -164,10 +164,10 @@ _+ changeCurrentDateToFirstDayOfPreviousMonth() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>695</x>
-      <y>355</y>
-      <w>195</w>
-      <h>70</h>
+      <x>630</x>
+      <y>384</y>
+      <w>234</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>AuxillaryMethods
 --
@@ -185,16 +185,15 @@ _+ checkComma() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>510</x>
-      <y>465</y>
-      <w>255</w>
-      <h>140</h>
+      <x>408</x>
+      <y>516</y>
+      <w>306</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>BudgetManager
 --
 - ID_OF_LOGGED_USER : Integer
-- incomes : vector &lt;Income&gt;
-- expenses : vector &lt;Expense&gt;
+- incomes : vector &lt;IncomeExpense&gt;
 - fileWithIncomesXML : FileWithIncomesXML
 - fileWithExpensesXML : FileWithExpensesXML
 --
@@ -212,46 +211,28 @@ _+ checkComma() : String_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>710</x>
-      <y>650</y>
-      <w>150</w>
-      <h>70</h>
+      <x>648</x>
+      <y>738</y>
+      <w>516</w>
+      <h>84</h>
     </coordinates>
-    <panel_attributes>Income
+    <panel_attributes>IncomeExpense
 --
 - amount : float
 - date : String
 - dateInt: Integer
-- typeOfIncome : String
-- incomeId : Integer
-- userId : Integer</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1140</x>
-      <y>445</y>
-      <w>105</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>Expense
---
-- amount : float
-- date : String
-- dateInt: Integer
-- typeOfExpense : String
-- incomeId : Integer
+- item : String
+- operationId : Integer
 - userId : Integer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>325</x>
-      <y>450</y>
-      <w>195</w>
-      <h>105</h>
+      <x>186</x>
+      <y>498</y>
+      <w>234</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;190.0;370.0;190.0</additional_attributes>
@@ -259,10 +240,10 @@ _+ checkComma() : String_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>600</y>
-      <w>15</w>
-      <h>60</h>
+      <x>648</x>
+      <y>678</y>
+      <w>18</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
@@ -270,10 +251,10 @@ _+ checkComma() : String_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>825</x>
-      <y>600</y>
-      <w>15</w>
-      <h>60</h>
+      <x>786</x>
+      <y>678</y>
+      <w>18</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
@@ -281,10 +262,10 @@ _+ checkComma() : String_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>910</x>
-      <y>90</y>
-      <w>15</w>
-      <h>105</h>
+      <x>888</x>
+      <y>66</y>
+      <w>18</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;190.0;10.0;10.0</additional_attributes>
@@ -292,10 +273,10 @@ _+ checkComma() : String_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>830</x>
-      <y>90</y>
-      <w>15</w>
-      <h>45</h>
+      <x>792</x>
+      <y>66</y>
+      <w>18</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
@@ -303,32 +284,10 @@ _+ checkComma() : String_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1045</x>
-      <y>475</y>
-      <w>105</w>
-      <h>15</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;190.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>760</x>
-      <y>515</y>
-      <w>390</w>
-      <h>15</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;760.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>755</x>
-      <y>275</y>
-      <w>15</w>
-      <h>90</h>
+      <x>702</x>
+      <y>288</y>
+      <w>18</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
@@ -336,10 +295,10 @@ _+ checkComma() : String_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>420</y>
-      <w>15</w>
-      <h>55</h>
+      <x>660</x>
+      <y>462</y>
+      <w>18</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
@@ -347,10 +306,10 @@ _+ checkComma() : String_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>885</x>
-      <y>400</y>
-      <w>55</w>
-      <h>50</h>
+      <x>858</x>
+      <y>438</y>
+      <w>66</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>90.0;80.0;90.0;10.0;10.0;10.0</additional_attributes>
@@ -358,10 +317,10 @@ _+ checkComma() : String_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>825</x>
-      <y>420</y>
-      <w>15</w>
-      <h>135</h>
+      <x>786</x>
+      <y>462</y>
+      <w>18</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;250.0;10.0;10.0</additional_attributes>
@@ -369,10 +328,10 @@ _+ checkComma() : String_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
-      <y>200</y>
-      <w>245</w>
-      <h>105</h>
+      <x>216</x>
+      <y>198</y>
+      <w>294</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;190.0;10.0;10.0;470.0;10.0</additional_attributes>
@@ -380,12 +339,23 @@ _+ checkComma() : String_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>565</x>
-      <y>385</y>
-      <w>15</w>
-      <h>90</h>
+      <x>474</x>
+      <y>420</y>
+      <w>18</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1008</x>
+      <y>552</y>
+      <w>18</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;310.0</additional_attributes>
   </element>
 </diagram>

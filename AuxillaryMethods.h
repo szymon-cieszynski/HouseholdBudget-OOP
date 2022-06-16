@@ -4,16 +4,14 @@
 
 #include <iostream>
 
-using namespace std;
-
 class AuxillaryMethods
 {
-    public:
+public:
     static char loadCharacter();
-    static string changeFirstLetterToCapitalAndOthersToLower(string text);
-    static string loadLine();
-    static string floatToString(float amount);
-    static string checkComma(string amountString);
+    static std::string changeFirstLetterToCapitalAndOthersToLower(std::string text);
+    static std::string loadLine();
+    static std::string floatToString(float amount);
+    static std::string checkComma(std::string amountString);
 };
 
 #endif

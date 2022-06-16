@@ -6,37 +6,35 @@
 #include <algorithm> //for sort
 #include <windows.h>
 
-#include "Income.h"
-#include "Expense.h"
+#include "IncomeExpense.h"
 #include "AuxillaryMethods.h"
 #include "OperationOnDates.h"
 #include "FileWithIncomesXML.h"
 #include "FileWithExpensesXML.h"
 
-using namespace std;
-
 class BudgetManager
 {
-private:
-    const int ID_OF_LOGGED_USER;
-    int idLoggedUser;
-    vector <Income> incomes;
-    vector <Expense> expenses;
-    FileWithIncomesXML fileWithIncomesXML;
-    FileWithExpensesXML fileWithExpensesXML;
-
 public:
-    BudgetManager(int idLoggedUser) : ID_OF_LOGGED_USER(idLoggedUser)
-    {
-        incomes = fileWithIncomesXML.loadIncomesFromFile(ID_OF_LOGGED_USER);
-        expenses = fileWithExpensesXML.loadExpensesFromFile(ID_OF_LOGGED_USER);
-    };
+    BudgetManager(unsigned int idLoggedUser):
+        ID_OF_LOGGED_USER(idLoggedUser),
+        fileWithIncomesXML(),
+        fileWithExpensesXML(),
+        incomes(fileWithIncomesXML.loadIncomesFromFile(ID_OF_LOGGED_USER)),
+        expenses(fileWithExpensesXML.loadExpensesFromFile(ID_OF_LOGGED_USER))
+    {};
 
-    void addIncome(int idLoggedUser);
-    void addExpense(int idLoggedUser);
+    void addIncome(unsigned int idLoggedUser);
+    void addExpense(unsigned int idLoggedUser);
     void showBalanceFromCurrentMonth();
     void showBalanceFromPreviousMonth();
     void showBalanceFromSelectedPeriod();
+
+private:
+    const unsigned int ID_OF_LOGGED_USER;
+    FileWithIncomesXML fileWithIncomesXML;
+    FileWithExpensesXML fileWithExpensesXML;
+    std::vector <IncomeExpense> incomes;
+    std::vector <IncomeExpense> expenses;
 };
 
 

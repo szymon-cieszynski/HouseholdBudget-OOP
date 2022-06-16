@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void User::setId(int newId)
+void User::setId(unsigned int newId)
 {
     if (newId >= 0)
         id = newId;
@@ -27,7 +27,7 @@ void User::setPassword(string newPassword)
     password = newPassword;
 }
 
-int User::getId()
+unsigned int User::getId()
 {
     return id;
 }

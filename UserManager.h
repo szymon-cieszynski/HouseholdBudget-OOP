@@ -7,27 +7,14 @@
 #include "User.h"
 #include "FileWithUsersXML.h"
 
-using namespace std;
-
 class UserManager
 {
-private:
-    int idLoggedUser;
-    vector <User> users;
-
-    User typeDataOfNewUser();
-    int establishNewUserID();
-    bool isLoginExist(string login);
-    void changeOfLoggedUserPassword();
-    FileWithUsersXML fileWithUsersXML;
-
-
 public:
-    UserManager()
-    {
-        idLoggedUser = 0;
-        users = fileWithUsersXML.loadUsersFromFile();
-    };
+    UserManager() :
+    idLoggedUser(0),
+    users(fileWithUsersXML.loadUsersFromFile()),
+    fileWithUsersXML()
+    {};
 
     void registrationOfUser();
     char chooseFromMainMenu();
@@ -37,6 +24,16 @@ public:
     void changePassword();
     void logOut();
 
+private:
+    unsigned int idLoggedUser;
+    static const unsigned int INVALID_USER = 0;
+    std::vector <User> users;
+
+    User typeDataOfNewUser();
+    int establishNewUserID();
+    bool isLoginExist(const string &login);
+    void changeOfLoggedUserPassword();
+    FileWithUsersXML fileWithUsersXML;
 
 };
 

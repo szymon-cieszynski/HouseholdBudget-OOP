@@ -4,21 +4,16 @@
 #include <iostream>
 #include <vector>
 
-#include "Expense.h"
+#include "IncomeExpense.h"
 #include "Markup.h"
 #include "AuxillaryMethods.h"
 
-using namespace std;
-
 class FileWithExpensesXML
 {
-private:
-
 public:
-    void addExpenseToFile(Expense expense);
-    vector <Expense> loadExpensesFromFile(int idLoggedUser);
+    void addExpenseToFile(IncomeExpense incomeExpense);
+    std::vector <IncomeExpense> loadExpensesFromFile(int idLoggedUser);
     int establishNewExpenseIdFromFile();
-
 
 };
 

@@ -2,6 +2,8 @@
 #include <string>
 #include <time.h>
 
+using namespace std;
+
 string OperationOnDates::loadAndCheckDate()
 {
     string date = "";

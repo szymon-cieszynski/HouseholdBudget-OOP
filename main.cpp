@@ -1,8 +1,6 @@
 #include <iostream>
 #include "HouseholdBudget.h"
 
-using namespace std;
-
 int main()
 {
     HouseholdBudget householdBudget;

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void FileWithExpensesXML::addExpenseToFile(Expense expense)
+void FileWithExpensesXML::addExpenseToFile(IncomeExpense incomeExpense)
 {
 
     CMarkup xml;
@@ -18,19 +18,19 @@ void FileWithExpensesXML::addExpenseToFile(Expense expense)
     xml.IntoElem();
     xml.AddElem("Expense");
     xml.IntoElem();
-    xml.AddElem("ExpenseId", expense.getExpenseId());
-    xml.AddElem("UserId", expense.getUserId());
-    xml.AddElem("Date", expense.getDate());
-    xml.AddElem("Item", (expense.getTypeOfExpense()));
-    xml.AddElem("Amount", AuxillaryMethods::floatToString(expense.getAmount()));
+    xml.AddElem("ExpenseId", incomeExpense.getOperationId());
+    xml.AddElem("UserId", incomeExpense.getUserId());
+    xml.AddElem("Date", incomeExpense.getDate());
+    xml.AddElem("Item", (incomeExpense.getTypeOfItem()));
+    xml.AddElem("Amount", AuxillaryMethods::floatToString(incomeExpense.getAmount()));
 
     xml.Save("expenses.xml");
 }
 
-vector <Expense> FileWithExpensesXML::loadExpensesFromFile(int idLoggedUser)
+vector <IncomeExpense> FileWithExpensesXML::loadExpensesFromFile(int idLoggedUser)
 {
-    vector <Expense> expenses;
-    Expense expense;
+    vector <IncomeExpense> expenses;
+    IncomeExpense incomeExpense;
 
     CMarkup xml;
     bool fileExists = xml.Load( "expenses.xml" );
@@ -50,26 +50,26 @@ vector <Expense> FileWithExpensesXML::loadExpensesFromFile(int idLoggedUser)
             if(idLoggedUser == userId)
             {
                 xml.ResetMainPos(); //without this wrong writing of expenseId
-                expense.setUserId(userId);
+                incomeExpense.setUserId(userId);
 
                 xml.FindElem( "ExpenseId" );
                 int expenseId = 0;
                 expenseId = atoi(xml.GetData().c_str() );
-                expense.setExpenseId(expenseId);
+                incomeExpense.setOperationId(expenseId);
 
                 xml.FindElem( "Date" );
                 string date = xml.GetData();
-                expense.setDate(date);
+                incomeExpense.setDate(date);
 
                 xml.FindElem( "Item" );
                 string item = xml.GetData();
-                expense.setTypeOfExpense(item);
+                incomeExpense.setTypeOfItem(item);
 
                 xml.FindElem( "Amount" );
                 float amount = atof(xml.GetData().c_str() );
-                expense.setAmount(amount);
+                incomeExpense.setAmount(amount);
 
-                expenses.push_back(expense);
+                expenses.push_back(incomeExpense);
             }
             xml.OutOfElem(); //out of Expense - for checking other id's
         }
